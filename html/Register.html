@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
+    <link rel="stylesheet" href="/Styles/styles.css">
 </head>
 <body>
+
     <form>
         <label for="Nombres">Nombres: </label>
         <input type="text" id="Nombres" />
@@ -20,18 +22,64 @@
         <input type="button" value="Registrar" onclick="ValidarUsuario();" />
     </form>
     <div id="mensaje"></div>
-    <script src="../javascript/funciones_login.js" type="text/javascript"></script>
+    <script src="/javascript/funciones_login.js" type="text/javascript"></script>
+=======
+    <div class="contenedor">
+        <img class="logo-m" src="/img/logo.svg" alt="logo rentease">
+        <br>
+        <div class="login-form">
+            <h1>Nuevo Usuario</h1>
+            <br>
+            <label class="letra" for="">Nombre</label>
+            <br>
+            <input class="inputs-medidas inputs" type="text" name="nombres" id="Nombres">
+            <br>
+            <label class="letra" for="">Apellido</label>
+            <br>
+            <input class="inputs-medidas inputs" type="text" name="apellidos" id="Apellidos">
+            <br>
+            <label class="letra" for="">Fecha de Nacimiento</label>
+            <br>
+            <input class="inputs-medidas inputs" type="date" name="fecha" id="Fecha">
+            <br>
+            <label class="letra" for="">E-mail</label>
+            <br>
+            <input class="inputs-medidas inputs" type="text" name="correo" id="Correo">
+            <br>
+            <label class="letra" for="">Contraseña</label>
+            <br>
+            <input class="inputs-medidas inputs" type="password" name="password" id="Clave">
+            <p class="letra color-gris">Utiliza al menos 8 caracteres, <br> 1 caracter especial y 1 número</p>
+            <br>
+            <button class="boton inputs-medidas" type="submit" onclick="ValidarUsuario()">Registrarse en RentEase</button>
+            <br>
+        </div>
+    </div>
+    <div class="footer">
+    </div>
+
+    <script src="/javascript/funciones_login.js" type="text/javascript"></script>
+
     <script>
         var ValidarUsuario = function(){
+
+            //Validar campos vacios
+            let idRegistro = ['Nombres', 'Apellidos', 'Fecha', 'Correo', 'Clave'];
+
+            for(let item of idRegistro){
+                if(!document.getElementById(item).value){
+                    alert(`El campo ${item} está vacio, por favor ingresa un dato válido`);
+                    return;
+                }
+            }
+
             let nombres = document.getElementById('Nombres').value;
             let apellidos = document.getElementById('Apellidos').value;
-            let usuario = document.getElementById('Usuario').value;
             let correo = document.getElementById('Correo').value;
             let clave = document.getElementById('Clave').value;
             let user = {
                 name: nombres,
                 secondname: apellidos,
-                username: usuario,
                 email: correo,
                 password: clave
             }
