@@ -10,11 +10,19 @@ const validarLogin = function () {
   let pass = document.getElementById('password').value;
 
   let userObject = {
-    username: user,
+    username: user.toLowerCase(),
     password: pass,
   };
 
-  autenticarUsuario();
+  if (autenticarUsuario(userObject) === 'Credenciales correctas') {
+    document.location.href = 'Home.html';
+  } else {
+    document.getElementById('username').classList.remove('inputs');
+    document.getElementById('username').classList.add('inputs-vacio');
+    document.getElementById('password').classList.remove('inputs');
+    document.getElementById('password').classList.add('inputs-vacio');
+    document.getElementById('login-email-pass').classList.remove('no-display');
+  }
 };
 
 const validarRegister = function () {
@@ -88,8 +96,6 @@ const validarCamposVacios = function (ids, parraf) {
   }
 };
 
-const autenticarUsuario = function () {};
-
 const registrarUsuario = function (userRegister) {
   let usuariosArray = [];
   let usuarioStorage = JSON.parse(localStorage.getItem('usuariosGuardados'));
@@ -111,8 +117,8 @@ const registrarUsuario = function (userRegister) {
 
 const claveValidacion = function () {
   let claveDigi = document.getElementById('clave').value;
-  let claveArray = claveDigi.split('');
-  console.log(claveArray);
+  let caracterSpecRegex = /([!@#$%^&*])/gm;
+  let numeroRegex = /([0-9])/gm;
   let caracteres8 = document.querySelectorAll('span');
   for (let i = 0; i < claveDigi.length; i++) {
     if (claveDigi.length < 8) {
@@ -121,27 +127,35 @@ const claveValidacion = function () {
       caracteres8[0].classList.remove('validar-clave');
     }
   }
-  if (!claveRegex(claveDigi)) {
+  if (!regexValid(claveDigi, caracterSpecRegex)) {
     caracteres8[1].classList.add('validar-clave');
   } else {
     caracteres8[1].classList.remove('validar-clave');
   }
 
-  if (!numeroRegex(claveDigi)) {
+  if (!regexValid(claveDigi, numeroRegex)) {
     caracteres8[2].classList.add('validar-clave');
   } else {
     caracteres8[2].classList.remove('validar-clave');
   }
 };
 
-const claveRegex = function (input) {
-  let caracterSpec = /([!@#$%^&*])/gm;
-  let resultado = caracterSpec.test(input);
+const regexValid = (input, regex) => {
+  let resultado = regex.test(input);
   return resultado;
 };
 
-const numeroRegex = input => {
-  let numeroRegex = /([0-9])/gm;
-  let resultado = numeroRegex.test(input);
-  return resultado;
+//! LOGIN
+
+const autenticarUsuario = userLogin => {
+  let usuarioStorage = JSON.parse(localStorage.getItem('usuariosGuardados'));
+  console.log(usuarioStorage);
+  for (let i = 0; i < usuarioStorage.length; i++) {
+    if (
+      usuarioStorage[i].correo === userLogin.username &&
+      usuarioStorage[i].clave === userLogin.password
+    ) {
+      return 'Credenciales correctas';
+    }
+  }
 };
