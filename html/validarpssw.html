@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Contraseña</title>
+</head>
+<body>
+
+<input type="password" id="Clave" placeholder="Ingrese su contraseña" required>
+<button type="button" onclick="verificarCaracterEspecial()">Verificar Contraseña</button>
+
+<script>
+// JavaScript para verificar caracteres especiales en la contraseña
+function verificarCaracterEspecial() {
+    // Obtener el valor de la contraseña desde el campo de entrada
+    const password = document.getElementById("Clave").value;
+    
+    // Definir el patrón para caracteres especiales
+    const specialCharactersPattern = /[!"#$%&'()*+,-./:;<=>?@_`{|}~]/;
+    const numberPattern = /\d/;
+    const uppercasePattern = /[A-Z]/;
+    const lowercasePattern = /[a-z]/;
+    
+    // Verificar si la contraseña contiene al menos un carácter especial
+   
+    const hasSpecialCharacter = specialCharactersPattern.test(password);
+    const hasnumero= numberPattern.test(password);
+    const hasmayus = uppercasePattern.test(password);
+    const hasminus = lowercasePattern.test(password);
+
+
+    if (hasSpecialCharacter && hasnumero && hasmayus &&hasminus) {
+        alert("La contraseña esta bien.");
+        console.log(password);
+    } else {
+        alert("La contraseña no contiene formato de seguridad");
+        console.log(password);
+    }
+}
+</script>
+
+</body>
+</html>
