@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>RentEase Registro</title>
     <link rel="stylesheet" href="/Styles/styles.css">
 </head>
 <body>
@@ -20,12 +20,12 @@
             <br>
             <form>
             <label class="letra" for="">Nombre</label><br>
-                <input class="inputs-medidas inputs" type="text" name="nombres" id="Nombres" pattern="[a-z{10}]" minlength="2" maxlength="10" title="Ej. Ramiro" title="Ej. Ramiro" placeholder="Ramiro" required autofocus>
+                <input class="inputs-medidas inputs" type="text" name="nombres" id="Nombres" pattern="[a-z]" minlength="2" maxlength="10" title="Ej. Ramiro" title="Ej. Ramiro" placeholder="Ramiro" required autofocus>
             <br>
             <br>
             <label class="letra" for="">Apellido</label>
             <br>
-            <input class="inputs-medidas inputs" type="text" name="apellidos" id="Apellidos" pattern="[a-z{10}]" minlength="2" maxlength="10" title="Ej. Pavon" placeholder="Pavon" required >
+            <input class="inputs-medidas inputs" type="text" name="apellidos" id="Apellidos" pattern="[a-z]" minlength="2" maxlength="10" title="Ej. Pavon" placeholder="Pavon" required >
             <br>
             <br>
             <label class="letra" for="">Edad</label>
@@ -34,7 +34,7 @@
             <br>
             <label class="letra" for="">Usuario</label>
             <br>
-            <input class="inputs-medidas inputs" type="text" name="user" id="Usuario" pattern="[a-z{10}]" minlength="2" maxlength="10" required>
+            <input class="inputs-medidas inputs" type="text" name="user" id="Usuario" pattern="[a-z]" minlength="2" required>
             <br>
             <br>
             <label class="letra" for="">E-mail:</label>
@@ -98,7 +98,7 @@
            
             if(resultado == "OK")
             {
-                alert("Bienvenido");
+                alert("Bienvenido - Ingresa tus credenciales");
                 console.log(resultado);
               document.location.href = "Login.html";
             }
