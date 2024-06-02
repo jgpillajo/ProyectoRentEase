@@ -95,6 +95,6 @@ function ValidarPassword() {
     else {
      
         return false;
-      
+
     }
 }
