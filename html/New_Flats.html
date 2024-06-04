@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Nuevo Bien</title>
+    <link rel="stylesheet" href="/Styles/styles.css">
+</head>
+<body>
+    <div id="mensaje"></div>
+
+    <div class="contenedor">
+        <img class="logo-m" src="/img/logo.svg" alt="logo rentease">
+        <br>
+        <div class="bien-form">
+            <h1>Nuevo Bien</h1>
+            <br>
+    <form action="">
+        <label class="letra" for="">Ciudad:</label><br>
+        <input class="inputs-medidas inputs" type="text" id="Ciudad" placeholder="Ingrese una ciudad" /> <br><br>
+        <label class="letra" for="">Direccion:</label><br>
+        <input class="inputs-medidas inputs" type="text" id="Direccion" placeholder="Ingrese dirección" /><br><br>
+        <label class="letra" for="">Numeracion domicialiaria:</label><br>
+        <input class="inputs-medidas inputs" type="text" id="BienNumero" placeholder="Ingrese el número del bien" /><br><br>
+        <label class="letra" for="">Area Total:</label><br>
+        <input class="inputs-medidas inputs" type="text" id="Area" placeholder="Ingrese el área" /><br><br>
+        <label for="aire">Tiene AC?</label> <br>
+        <input  type="radio" id="aire1" name="aire" value="SI" /> SI
+        <input type="radio" id="aire2" name="aire" value="NO" checked="" /> NO <br><br>
+        <label class="letra" for="">Año de construcción:</label><br>
+        <input class="inputs-medidas inputs" type="text" id="Anio" placeholder="Ingrese el año de construcción" /><br><br>
+        <label class="letra" for="">Precio de arrendamiento:</label><br>
+        <input class="inputs-medidas inputs" type="text" id="Renta" placeholder="Ingrese el precio" /><br><br>
+        <label class="letra" for="">Disponibilidad de arriendo:</label><br>
+        <input class="inputs-medidas inputs" type="text" id="Disponible" placeholder="Ingrese la disponibilidad" /><br><br>
+        <label class="letra" for="">Nombre del dueño</label><br>
+        <input class="inputs-medidas inputs" type="text" id="Dueno" placeholder="Ingrese el nombre del dueño" /><br><br>
+        <button class="inputs-medidas inputs" type="button" onclick="ValidadFlat()">Crear Bien</button>
+    </form>
+</div>
+    <script>
+        var ValidadFlat = function(){
+            let ciudad = document.getElementById('Ciudad').value;
+            let direccion= document.getElementById('Direccion').value;
+            let bienNumero = document.getElementById('BienNumero').value;
+            let area = document.getElementById('Area').value;
+            let anio = document.getElementById('Anio').value;
+            let renta = document.getElementById('Renta').value;
+            let disponibilidad = document.getElementById('Disponible').value;
+            let duenio = document.getElementById('Dueno').value;
+            let aireacondicionado = document.querySelector('input[name=aire]:checked').value;
+            
+            
+            if(ciudad == "" || ciudad == undefined) {
+                alert('Ingrese la ciudad donde se encuentra el bien');
+                return false;
+            }
+            if(direccion == "" || direccion == undefined) {
+                alert('Ingrese la direccion donde se encuentra el bien');
+                return false;
+            }
+            if(bienNumero == "" || bienNumero == undefined) {
+                alert('Ingrese el numero del bien');
+                return false;
+            }
+            if(area == "" || area == undefined){
+                alert('Ingrese el area del bien');
+                return false;
+            }
+            if( anio== "" || anio == undefined){
+                alert('Ingrese el año de contruccion del bien');
+                return false;
+            }
+            if( renta== "" || renta == undefined) {
+                alert('Ingrese el valor de renta del bien');
+                return false;
+            }
+            if( disponibilidad== "" || disponibilidad == undefined) {
+                alert('Ingrese la disponibilidad del bien');
+                return false;
+            }
+            if( duenio== "" || duenio== undefined) {
+                alert('Ingrese le dueño del bien');
+                return false;
+            }
+            // Objeto 1
+            
+            var flat1 = {
+                City: ciudad, // 'Quito',
+                StreetName: direccion,
+                StreetNumber: bienNumero,
+                AreaSize: area,
+                HasAC:aireacondicionado,
+                YearBuilt: anio,
+                RentPrice: renta,
+                DateAvailable: disponibilidad,
+                Creator: duenio,
+            }
+
+            let tmp = localStorage.getItem('bienes');
+            if(tmp){
+                let arrai = JSON.parse(tmp);
+                let bienes = new Set(arrai);
+                bienes.add(flat1);
+                arrai = [...bienes];
+                localStorage.setItem('bienes', JSON.stringify(arrai));
+            }
+            else{
+                let bienes = new Set(); // Conjunto de bienes (flats)
+                bienes.add(flat1);
+                // const arrai = Array.from(bienes);
+                const arrai = [...bienes];
+                localStorage.setItem('bienes', JSON.stringify(arrai));
+            }
+            alert('Bien almacenado!!');
+        }
+
+    </script>
+
+</body>
+</html>

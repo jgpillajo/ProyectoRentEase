@@ -3,50 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>RentEase Registro</title>
     <link rel="stylesheet" href="/Styles/styles.css">
 </head>
 <body>
+
+   
+    <div id="mensaje"></div>
+    <script src="/javascript/funciones_login.js" type="text/javascript"></script>
+
     <div class="contenedor">
         <img class="logo-m" src="/img/logo.svg" alt="logo rentease">
         <br>
         <div class="login-form">
             <h1>Nuevo Usuario</h1>
             <br>
-            <label class="letra" for="">Nombre</label>
+            <form>
+            <label class="letra" for="">Nombre</label><br>
+                <input class="inputs-medidas inputs" type="text" name="nombres" id="Nombres" pattern="[a-z]" minlength="2" maxlength="10" title="Ej. Ramiro" title="Ej. Ramiro" placeholder="Ramiro" required autofocus>
             <br>
-            <input class="inputs-medidas inputs" type="text" name="nombres" id="Nombres">
             <br>
             <label class="letra" for="">Apellido</label>
             <br>
-            <input class="inputs-medidas inputs" type="text" name="apellidos" id="Apellidos">
+            <input class="inputs-medidas inputs" type="text" name="apellidos" id="Apellidos" pattern="[a-z]" minlength="2" maxlength="10" title="Ej. Pavon" placeholder="Pavon" required >
             <br>
-            <label class="letra" for="">Fecha de Nacimiento</label>
             <br>
-            <input class="inputs-medidas inputs" type="date" name="fecha" id="Fecha">
+            <label class="letra" for="">Edad</label>
             <br>
-            <label class="letra" for="">E-mail</label>
+            
+            <input class="inputs-medidas inputs" type="date" name="edad" id="Edad" required>
             <br>
-            <input class="inputs-medidas inputs" type="text" name="correo" id="Correo">
+            <br>
+            <label class="letra" for="">Usuario</label>
+            <br>
+            <input class="inputs-medidas inputs" type="text" name="user" id="Usuario" pattern="[a-z]" minlength="2" required>
+            <br>
+            <br>
+            <label class="letra" for="">E-mail:</label>
+            <br>
+            <input class="inputs-medidas inputs" type="email" name="correo" id="Correo" placeholder="example@rentease.com" required>
+            <br>
             <br>
             <label class="letra" for="">Contraseña</label>
             <br>
-            <input class="inputs-medidas inputs" type="password" name="password" id="Clave">
-            <p class="letra color-gris">Utiliza al menos 8 caracteres, <br> 1 caracter especial y 1 número</p>
+            <input class="inputs-medidas inputs" type="password" name="password" id="Clave"  minlength="8" required>
+            <abbr class="boton inputs-medidas" title=" La Contraseña puede contener una mayúscula, un numero y un carácter especial por norma de seguridad"> ?</abbr>
             <br>
-            <button class="boton inputs-medidas" type="submit" onclick="ValidarUsuario()">Registrarse en RentEase</button>
             <br>
+            
+            <br>
+            <br>
+            <button class="boton inputs-medidas" type="submit" value="Registrar" onclick="ValidarPassword();ValidarUsuario()">Registrar</button>
+            <br>
+          
+            <br>
+        </form>
+        
         </div>
     </div>
     <div class="footer">
     </div>
 
     <script src="/javascript/funciones_login.js" type="text/javascript"></script>
+
     <script>
         var ValidarUsuario = function(){
 
             //Validar campos vacios
-            let idRegistro = ['Nombres', 'Apellidos', 'Fecha', 'Correo', 'Clave'];
+            let idRegistro = ['Nombres', 'Apellidos', 'Edad','Usuario', 'Correo', 'Clave'];
 
             for(let item of idRegistro){
                 if(!document.getElementById(item).value){
@@ -54,26 +78,38 @@
                     return;
                 }
             }
-
-            let nombres = document.getElementById('Nombres').value;
-            let apellidos = document.getElementById('Apellidos').value;
-            let correo = document.getElementById('Correo').value;
-            let clave = document.getElementById('Clave').value;
             let user = {
-                name: nombres,
-                secondname: apellidos,
-                email: correo,
-                password: clave
+                name: '',
+                secondname:'',
+                edad: '',
+                usuario:'',
+                email: '',
+                password: ''
             }
+
+            let name=document.getElementById('Nombres').value;
+            let secondname=document.getElementById('Apellidos').value;
+            let edad=document.getElementById('Edad').value;
+            let username = document.getElementById('Usuario').value;
+            let email=document.getElementById('Correo').value;
+            let password=document.getElementById('Clave').value;
+
+            user = {name, secondname,edad, username, email, password};
+
             let resultado = RegistrarUsuario(user);
+           
             if(resultado == "OK")
             {
-                document.location.href = "login.html";
+                alert("Bienvenido - Ingresa tus credenciales");
+                console.log(resultado);
+              document.location.href = "Login.html";
             }
             else{
                 alert(resultado);
             }
         }
     </script>
+
+
 </body>
 </html>
