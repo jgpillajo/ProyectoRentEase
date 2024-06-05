@@ -94,29 +94,6 @@ h1 {
   color: var(--darkgray);
 }
 
-/** Home  */
-
-.logo-s {
-  width: 275px;
-}
-
-nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.nav-bar a {
-  text-decoration: none;
-  margin: 0 5px;
-  padding: 15px;
-  color: black;
-}
-
-.nav-bar a:hover {
-  background-color: var(--greenyllw);
-}
-
 /** Campos Vacios*/
 
 .campos-vacios {
@@ -155,4 +132,52 @@ nav {
 .validar-clave {
   color: var(--red);
   font-weight: 600;
+}
+
+/** Home  */
+
+.logo-s {
+  width: 225px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav a,
+.nav button {
+  text-decoration: none;
+  margin: 0 5px;
+  padding: 15px;
+  color: black;
+  background: white;
+  border: none;
+}
+
+.nav a:hover,
+.nav button:hover {
+  background-color: var(--greenyllw);
+}
+
+.img-fondo {
+  width: 1050px;
+  display: block;
+  align-content: center;
+  margin: 0 auto;
+}
+
+.register-form {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin-top: 15px;
+}
+
+.form-2 {
+  display: flex;
 }

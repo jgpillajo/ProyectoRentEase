@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME</title>
+    <link rel="stylesheet" href="/Styles/styles.css">
 </head>
-<body onload="DefinirUsuario();">
-    <div id="mensaje"></div>
-    <script>
-        var DefinirUsuario = function(){
-            document.getElementById('mensaje').innerHTML = "Bienvenido " + localStorage.getItem('username');
-        }
-    </script>
+<!-- onload="sesionActual()" -->
+<body>
+    <div class="header">
+        <div>
+            <img class="logo-s" src="/img/logo.svg" alt="">
+        </div>
+        <div class="nav">
+            <a href="">Bienvenido ....</a>
+            <a href="">Nueva Propiedad</a>
+            <a href="">Favoritos</a>
+            <button>Cerrar Sesión</button>
+        </div>
+    </div>
+    <div >
+        <img class="img-fondo" src="/img/1.webp" alt="">
+    </div>
+<script src="/javascript/funciones_login.js"></script>
 </body>
 </html>
