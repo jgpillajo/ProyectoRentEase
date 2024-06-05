@@ -15,7 +15,12 @@ var RegistrarUsuario = function(user){
                 return "Usuario ya existe";
             }
         }
-        
+
+        if(!ValidarEmail(user.correo== false)){
+            alert("Correo Invalido");
+            return "El correo no tiene formato";
+        }
+
         if (!ValidarPassword(user.password== false)){
             alert("Contraseña Insegura!!");
           return "La contraseña debe contener una letra mayuscula,una muniscula, un numero y un caracter especial. ";
@@ -27,6 +32,11 @@ var RegistrarUsuario = function(user){
         return "OK";
     }
     else{
+        if(!ValidarEmail(user.correo== false)){
+            alert("Correo Invalido");
+            return "El correo no tiene formato";
+        }
+
         if (!ValidarPassword(user.password== false)) {
             alert("Contraseña Insegura!!");
             return "La contraseña debe contener una letra mayuscula,una muniscula, un numero y un caracter especial. ";
@@ -96,5 +106,19 @@ function ValidarPassword() {
      
         return false;
 
+    }
+}
+function ValidarEmail() {
+    const correo = document.getElementById("Correo").value;
+    const patronCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const tieneFormatoCorreo = patronCorreo.test(correo);
+
+    if (tieneFormatoCorreo) {
+      //  alert("email formato correcto");
+        return true;
+    } 
+    else {
+       // alert("email formato incorrecto");
+        return false;
     }
 }
