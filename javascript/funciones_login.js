@@ -15,6 +15,7 @@ const validarLogin = function () {
   };
 
   if (autenticarUsuario(userObject) === 'Credenciales correctas') {
+    usuarioEnSesion(user);
     document.location.href = 'Home.html';
   } else {
     document.getElementById('username').classList.remove('inputs');
@@ -58,6 +59,11 @@ const validarRegister = function () {
     correo: correo.toLowerCase(),
     clave: clave,
   };
+
+  if (claveValidacion().indexOf(false) === -1) {
+  } else {
+    return;
+  }
 
   if (registrarUsuario(userRegister) === 'Registro exitoso') {
     document.location.href = 'Login.html';
@@ -120,24 +126,32 @@ const claveValidacion = function () {
   let caracterSpecRegex = /([!@#$%^&*])/gm;
   let numeroRegex = /([0-9])/gm;
   let caracteres8 = document.querySelectorAll('span');
+  let verificador = [];
   for (let i = 0; i < claveDigi.length; i++) {
     if (claveDigi.length < 8) {
       caracteres8[0].classList.add('validar-clave');
+      verificador.push(false);
     } else {
       caracteres8[0].classList.remove('validar-clave');
+      verificador.push(true);
     }
   }
   if (!regexValid(claveDigi, caracterSpecRegex)) {
     caracteres8[1].classList.add('validar-clave');
+    verificador.push(false);
   } else {
     caracteres8[1].classList.remove('validar-clave');
+    verificador.push(true);
   }
 
   if (!regexValid(claveDigi, numeroRegex)) {
     caracteres8[2].classList.add('validar-clave');
+    verificador.push(false);
   } else {
     caracteres8[2].classList.remove('validar-clave');
+    verificador.push(true);
   }
+  return verificador;
 };
 
 const regexValid = (input, regex) => {
@@ -150,12 +164,90 @@ const regexValid = (input, regex) => {
 const autenticarUsuario = userLogin => {
   let usuarioStorage = JSON.parse(localStorage.getItem('usuariosGuardados'));
   console.log(usuarioStorage);
+  if (usuarioStorage === null) {
+    return;
+  }
   for (let i = 0; i < usuarioStorage.length; i++) {
-    if (
-      usuarioStorage[i].correo === userLogin.username &&
-      usuarioStorage[i].clave === userLogin.password
-    ) {
+    if (usuarioStorage[i].correo === userLogin.username && usuarioStorage[i].clave === userLogin.password) {
       return 'Credenciales correctas';
     }
   }
+};
+
+const usuarioEnSesion = useractual => {
+  let usuarioLogged = useractual;
+  localStorage.setItem('usuarioLogged', JSON.stringify(usuarioLogged));
+  return;
+};
+
+//! Solo con inicio de sesión se puede ver las páginas
+
+const sesionActual = () => {
+  const validarSesionActual = () => {
+    document.location.href = 'Login.html';
+  };
+  if (!JSON.parse(localStorage.getItem('usuarioLogged')) || JSON.parse(localStorage.getItem('usuarioLogged')) === '') {
+    alert('Inicia sesión para poder ver la página');
+    setTimeout(validarSesionActual, 1300);
+  } else {
+    return;
+  }
+};
+
+//! Provincias Ec
+
+let provincias = ['Azuay', 'Bolívar', 'Cañar', 'Carchi', 'Chimborazo', 'Cotopaxi', 'El Oro', 'Esmeraldas', 'Galápagos', 'Guayas', 'Imbabura', 'Loja', 'Los Ríos', 'Manabí', 'Morona-Santiago', 'Napo', 'Orellana', 'Pastaza', 'Pichincha', 'Santa Elena', 'Santo Domingo de los Tsáchilas', 'Sucumbíos', 'Tungurahua', 'Zamora-Chinchipe'];
+
+let provinciasValue = ['Azuay', 'Bolivar', 'Canar', 'Carchi', 'Chimborazo', 'Cotopaxi', 'El Oro', 'Esmeraldas', 'Galapagos', 'Guayas', 'Imbabura', 'Loja', 'Los Rios', 'Manabi', 'Morona-Santiago', 'Napo', 'Orellana', 'Pastaza', 'Pichincha', 'Santa Elena', 'Santo Domingo de los Tsachilas', 'Sucumbios', 'Tungurahua', 'Zamora-Chinchipe'];
+
+let idProvincias = document.getElementById('provincia');
+
+for (let [index, value] of provincias.entries()) {
+  let option = document.createElement('option');
+  option.value = `${provinciasValue[index]}`;
+  let provinciaText = `${value} `;
+  option.innerHTML = provinciaText;
+  idProvincias.appendChild(option);
+}
+
+//! New Flat
+
+const registratNewFlat = newFlat => {
+  let flatStorage = JSON.parse(localStorage.getItem('flatStorage'));
+  if (!flatStorage) {
+    let flatArray = [];
+    flatArray.push(newFlat);
+    localStorage.setItem('flatStorage', JSON.stringify(flatArray));
+  }
+};
+
+const validarNewFLat = () => {
+  let idFlat = ['provincia', 'ciudad', 'direccion', 'numeracion', 'area', 'aire', 'construccion', 'precio', 'disponibilidad'];
+  let parrafos = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9'];
+  /*   if (!validarCamposVacios(idFlat, parrafos)) {
+    return;
+  } */
+  let provincia = document.getElementById('provincia').value;
+  let ciudad = document.getElementById('ciudad').value;
+  let direccion = document.getElementById('direccion').value;
+  let numeracion = document.getElementById('numeracion').value;
+  let area = document.getElementById('area').value;
+  let aire = document.getElementById('aire').value;
+  let construccion = document.getElementById('construccion').value;
+  let precio = document.getElementById('precio').value;
+  let disponibilidad = document.getElementById('disponibilidad').value;
+
+  let flatObject = {
+    provincia: provincia,
+    ciudad: ciudad,
+    direccion: direccion,
+    numeracion: numeracion,
+    area: area,
+    aire: aire,
+    construccion: construccion,
+    precio: precio,
+    disponibilidad: disponibilidad,
+  };
+
+  registratNewFlat(flatObject);
 };
