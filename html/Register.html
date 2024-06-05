@@ -20,12 +20,12 @@
             <br>
             <form>
             <label class="letra" for="">Nombre</label><br>
-                <input class="inputs-medidas inputs" type="text" name="nombres" id="Nombres" pattern="[a-z]" minlength="2" maxlength="10" title="Ej. Ramiro" title="Ej. Ramiro" placeholder="Ramiro" required autofocus>
+                <input class="inputs-medidas inputs" type="text" name="nombres" id="Nombre" minlength="2" maxlength="10" title="Ramiro" placeholder="Ramiro" required autofocus>
             <br>
             <br>
             <label class="letra" for="">Apellido</label>
             <br>
-            <input class="inputs-medidas inputs" type="text" name="apellidos" id="Apellidos" pattern="[a-z]" minlength="2" maxlength="10" title="Ej. Pavon" placeholder="Pavon" required >
+            <input class="inputs-medidas inputs" type="text" name="apellidos" id="Apellido" minlength="2" maxlength="10" title="Pavon" placeholder="Pavon" required >
             <br>
             <br>
             <label class="letra" for="">Edad</label>
@@ -36,7 +36,7 @@
             <br>
             <label class="letra" for="">Usuario</label>
             <br>
-            <input class="inputs-medidas inputs" type="text" name="user" id="Usuario" pattern="[a-z]" minlength="2" required>
+            <input class="inputs-medidas inputs" type="text" name="user" id="Usuario" minlength="2" maxlength="10" placeholder="rpavon" required>
             <br>
             <br>
             <label class="letra" for="">E-mail:</label>
@@ -70,7 +70,7 @@
         var ValidarUsuario = function(){
 
             //Validar campos vacios
-            let idRegistro = ['Nombres', 'Apellidos', 'Edad','Usuario', 'Correo', 'Clave'];
+            let idRegistro = ['Nombre', 'Apellido', 'Edad','Usuario', 'Correo', 'Clave'];
 
             for(let item of idRegistro){
                 if(!document.getElementById(item).value){
@@ -87,8 +87,8 @@
                 password: ''
             }
 
-            let name=document.getElementById('Nombres').value;
-            let secondname=document.getElementById('Apellidos').value;
+            let name=document.getElementById('Nombre').value;
+            let secondname=document.getElementById('Apellido').value;
             let edad=document.getElementById('Edad').value;
             let username = document.getElementById('Usuario').value;
             let email=document.getElementById('Correo').value;
