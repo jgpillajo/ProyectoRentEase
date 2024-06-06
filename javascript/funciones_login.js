@@ -168,7 +168,10 @@ const autenticarUsuario = userLogin => {
     return;
   }
   for (let i = 0; i < usuarioStorage.length; i++) {
-    if (usuarioStorage[i].correo === userLogin.username && usuarioStorage[i].clave === userLogin.password) {
+    if (
+      usuarioStorage[i].correo === userLogin.username &&
+      usuarioStorage[i].clave === userLogin.password
+    ) {
       return 'Credenciales correctas';
     }
   }
@@ -186,7 +189,10 @@ const sesionActual = () => {
   const validarSesionActual = () => {
     document.location.href = 'Login.html';
   };
-  if (!JSON.parse(localStorage.getItem('usuarioLogged')) || JSON.parse(localStorage.getItem('usuarioLogged')) === '') {
+  if (
+    !JSON.parse(localStorage.getItem('usuarioLogged')) ||
+    JSON.parse(localStorage.getItem('usuarioLogged')) === ''
+  ) {
     alert('Inicia sesión para poder ver la página');
     setTimeout(validarSesionActual, 1300);
   } else {
@@ -196,9 +202,59 @@ const sesionActual = () => {
 
 //! Provincias Ec
 
-let provincias = ['Azuay', 'Bolívar', 'Cañar', 'Carchi', 'Chimborazo', 'Cotopaxi', 'El Oro', 'Esmeraldas', 'Galápagos', 'Guayas', 'Imbabura', 'Loja', 'Los Ríos', 'Manabí', 'Morona-Santiago', 'Napo', 'Orellana', 'Pastaza', 'Pichincha', 'Santa Elena', 'Santo Domingo de los Tsáchilas', 'Sucumbíos', 'Tungurahua', 'Zamora-Chinchipe'];
+let provincias = [
+  'Azuay',
+  'Bolívar',
+  'Cañar',
+  'Carchi',
+  'Chimborazo',
+  'Cotopaxi',
+  'El Oro',
+  'Esmeraldas',
+  'Galápagos',
+  'Guayas',
+  'Imbabura',
+  'Loja',
+  'Los Ríos',
+  'Manabí',
+  'Morona-Santiago',
+  'Napo',
+  'Orellana',
+  'Pastaza',
+  'Pichincha',
+  'Santa Elena',
+  'Santo Domingo de los Tsáchilas',
+  'Sucumbíos',
+  'Tungurahua',
+  'Zamora-Chinchipe',
+];
 
-let provinciasValue = ['Azuay', 'Bolivar', 'Canar', 'Carchi', 'Chimborazo', 'Cotopaxi', 'El Oro', 'Esmeraldas', 'Galapagos', 'Guayas', 'Imbabura', 'Loja', 'Los Rios', 'Manabi', 'Morona-Santiago', 'Napo', 'Orellana', 'Pastaza', 'Pichincha', 'Santa Elena', 'Santo Domingo de los Tsachilas', 'Sucumbios', 'Tungurahua', 'Zamora-Chinchipe'];
+let provinciasValue = [
+  'Azuay',
+  'Bolivar',
+  'Canar',
+  'Carchi',
+  'Chimborazo',
+  'Cotopaxi',
+  'El Oro',
+  'Esmeraldas',
+  'Galapagos',
+  'Guayas',
+  'Imbabura',
+  'Loja',
+  'Los Rios',
+  'Manabi',
+  'Morona-Santiago',
+  'Napo',
+  'Orellana',
+  'Pastaza',
+  'Pichincha',
+  'Santa Elena',
+  'Santo Domingo de los Tsachilas',
+  'Sucumbios',
+  'Tungurahua',
+  'Zamora-Chinchipe',
+];
 
 let idProvincias = document.getElementById('provincia');
 
@@ -222,7 +278,17 @@ const registratNewFlat = newFlat => {
 };
 
 const validarNewFLat = () => {
-  let idFlat = ['provincia', 'ciudad', 'direccion', 'numeracion', 'area', 'aire', 'construccion', 'precio', 'disponibilidad'];
+  let idFlat = [
+    'provincia',
+    'ciudad',
+    'direccion',
+    'numeracion',
+    'area',
+    'aire',
+    'construccion',
+    'precio',
+    'disponibilidad',
+  ];
   let parrafos = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9'];
   /*   if (!validarCamposVacios(idFlat, parrafos)) {
     return;
