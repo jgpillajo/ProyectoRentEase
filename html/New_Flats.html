@@ -13,32 +13,79 @@
         <img class="logo-m" src="/img/logo.svg" alt="logo rentease">
         <br>
         <div class="bien-form">
-            <h1>Nueva Propiedad</h1>
+            <h1>Nuevo Inmueble Rentable</h1>
             <br>
     <form action="">
         <label class="letra" for="">Ciudad:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Ciudad" placeholder="Ingrese una ciudad" autofocus required /> <br><br>
+        <input class="inputs-medidas inputs" type="text" id="Ciudad" placeholder="Ingrese una ciudad"minlength="2" maxlength="10" autofocus required /> <br><br>
         <label class="letra" for="">Dirección:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Direccion" placeholder="Ingrese dirección" /><br><br>
+        <input class="inputs-medidas inputs" type="text" id="Direccion" placeholder="Ingrese dirección" minlength="2" maxlength="10"/><br><br>
         <label class="letra" for="">Numeración domiciliaria:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="BienNumero" placeholder="Ingrese el número del bien" /><br><br>
+        <input class="inputs-medidas inputs" type="text" id="NumeracionBien" placeholder="Ingrese el número del bien" minlength="2" maxlength="10"/><br><br>
         <label class="letra" for="">Área Total:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Area" placeholder="Ingrese el área" /><br><br>
+        <input class="inputs-medidas inputs" type="text" id="Area" placeholder="Ingrese el área" minlength="2" maxlength="10"/><br><br>
         <label class="" for="aire"> Dispone de Aire Acondicionado ?</label> <br>
-        <input  type="radio" id="aire1" name="aire" value="SI" /> SI
-        <input type="radio" id="aire2" name="aire" value="NO" checked="" /> NO <br><br>
+        <input  type="radio" id="Aire" name="aire" value="SI" /> SI
+        <input type="radio" id="Aire" name="aire" value="NO" checked="" /> NO <br><br>
         <label class="letra" for="">Año de construcción:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Anio" placeholder="Ingrese el año de construcción" /><br><br>
+        <input class="inputs-medidas inputs" type="text" id="Anio" placeholder="Ingrese el año de construcción"minlength="2" maxlength="10" /><br><br>
         <label class="letra" for="">Precio de arrendamiento:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Renta" placeholder="Ingrese el precio" /><br><br>
+        <input class="inputs-medidas inputs" type="text" id="Precio" placeholder="Ingrese el precio" minlength="2" maxlength="10"/><br><br>
         <label class="letra" for="">Disponibilidad de arriendo:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Disponible" placeholder="Ingrese la disponibilidad" /><br><br>
-        
-        <button class="inputs-medidas inputs" type="submit" onclick="ValidadFlat()">Registrar Propiedad</button>
+        <input class="inputs-medidas inputs" type="date" name="edad" id="Disponible" required>
+        <br>
+        <br>
     </form>
+    <button class="inputs-medidas inputs" type="submit" onclick="ValidarSoloLetras();ValidadFlat()">Registrar Propiedad</button>
+
 </div>
+<script src="/javascript/funcionesflat.js" type="text/javascript"></script>
     <script>
-        var ValidadFlat = function(){
+ let ValidadFlat= function(){
+    let idRegistro = ['Ciudad', 'Direccion', 'NumeracionBien','Area', 'Aire', 'Anio','Precio','Disponible'];
+    for(let item of idRegistro){
+                if(!document.getElementById(item).value){
+                    alert(`El campo ${item} está vacio, por favor ingresa un dato válido`);
+                    return;
+                }
+            }
+        let flat = {
+        city: '',
+        streetname:'',
+        streetnumber: '',
+        size:'',
+        ac: '',
+        year: '',
+        price:'',
+        date:''
+        }
+
+            let city = document.getElementById('Ciudad').value;
+            let streetname= document.getElementById('Direccion').value;
+            let streetnumber = document.getElementById('NumeracionBien').value;
+            let size = document.getElementById('Area').value;
+            let ac = document.querySelector('input[name=aire]:checked').value;
+            let year= document.getElementById('Anio').value;
+            let price = document.getElementById('Precio').value;
+            let date= document.getElementById('Disponible').value;
+            
+            flat = {city, streetname, streetnumber ,size ,ac ,year ,price ,date};
+ 
+            let resultado = RegistrarFlat(flat); 
+            if(resultado == "OK")
+            {
+                alert("Bien reg");
+                console.log(resultado);
+              //document.location.href = "Login.html";
+            }
+            else{
+                alert(resultado);
+            }
+            
+
+        }
+/*
+    var ValidadFlat = function(){
             let ciudad = document.getElementById('Ciudad').value;
             let direccion= document.getElementById('Direccion').value;
             let bienNumero = document.getElementById('BienNumero').value;
@@ -50,7 +97,7 @@
             
             
             if(ciudad == "" || ciudad == undefined) {
-                alert('Ingrese la ciudad donde se encuentra el bien');
+                alert('Ingrese la ciudad donde se encuentra la propiedad');
                 return false;
             }
             if(direccion == "" || direccion == undefined) {
@@ -108,7 +155,7 @@
 
             alert('Propiedad Registrada');
         }
-
+        */
     </script>
 
 </body>
