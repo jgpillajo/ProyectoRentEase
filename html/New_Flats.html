@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Nuevo Bien</title>
+    <title>Registrar Propiedad</title>
     <link rel="stylesheet" href="/Styles/styles.css">
 </head>
 <body>
@@ -13,18 +13,18 @@
         <img class="logo-m" src="/img/logo.svg" alt="logo rentease">
         <br>
         <div class="bien-form">
-            <h1>Nuevo Bien</h1>
+            <h1>Nueva Propiedad</h1>
             <br>
     <form action="">
         <label class="letra" for="">Ciudad:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Ciudad" placeholder="Ingrese una ciudad" /> <br><br>
-        <label class="letra" for="">Direccion:</label><br>
+        <input class="inputs-medidas inputs" type="text" id="Ciudad" placeholder="Ingrese una ciudad" autofocus required /> <br><br>
+        <label class="letra" for="">Dirección:</label><br>
         <input class="inputs-medidas inputs" type="text" id="Direccion" placeholder="Ingrese dirección" /><br><br>
-        <label class="letra" for="">Numeracion domicialiaria:</label><br>
+        <label class="letra" for="">Numeración domiciliaria:</label><br>
         <input class="inputs-medidas inputs" type="text" id="BienNumero" placeholder="Ingrese el número del bien" /><br><br>
-        <label class="letra" for="">Area Total:</label><br>
+        <label class="letra" for="">Área Total:</label><br>
         <input class="inputs-medidas inputs" type="text" id="Area" placeholder="Ingrese el área" /><br><br>
-        <label for="aire">Tiene AC?</label> <br>
+        <label class="" for="aire"> Dispone de Aire Acondicionado ?</label> <br>
         <input  type="radio" id="aire1" name="aire" value="SI" /> SI
         <input type="radio" id="aire2" name="aire" value="NO" checked="" /> NO <br><br>
         <label class="letra" for="">Año de construcción:</label><br>
@@ -33,9 +33,8 @@
         <input class="inputs-medidas inputs" type="text" id="Renta" placeholder="Ingrese el precio" /><br><br>
         <label class="letra" for="">Disponibilidad de arriendo:</label><br>
         <input class="inputs-medidas inputs" type="text" id="Disponible" placeholder="Ingrese la disponibilidad" /><br><br>
-        <label class="letra" for="">Nombre del dueño</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Dueno" placeholder="Ingrese el nombre del dueño" /><br><br>
-        <button class="inputs-medidas inputs" type="button" onclick="ValidadFlat()">Crear Bien</button>
+        
+        <button class="inputs-medidas inputs" type="submit" onclick="ValidadFlat()">Registrar Propiedad</button>
     </form>
 </div>
     <script>
@@ -47,7 +46,6 @@
             let anio = document.getElementById('Anio').value;
             let renta = document.getElementById('Renta').value;
             let disponibilidad = document.getElementById('Disponible').value;
-            let duenio = document.getElementById('Dueno').value;
             let aireacondicionado = document.querySelector('input[name=aire]:checked').value;
             
             
@@ -64,7 +62,7 @@
                 return false;
             }
             if(area == "" || area == undefined){
-                alert('Ingrese el area del bien');
+                alert('Ingrese el área del bien');
                 return false;
             }
             if( anio== "" || anio == undefined){
@@ -79,14 +77,10 @@
                 alert('Ingrese la disponibilidad del bien');
                 return false;
             }
-            if( duenio== "" || duenio== undefined) {
-                alert('Ingrese le dueño del bien');
-                return false;
-            }
-            // Objeto 1
+            // Objeto Bienes
             
-            var flat1 = {
-                City: ciudad, // 'Quito',
+            var grupoBienes = {
+                City: ciudad, 
                 StreetName: direccion,
                 StreetNumber: bienNumero,
                 AreaSize: area,
@@ -94,25 +88,25 @@
                 YearBuilt: anio,
                 RentPrice: renta,
                 DateAvailable: disponibilidad,
-                Creator: duenio,
             }
 
-            let tmp = localStorage.getItem('bienes');
-            if(tmp){
-                let arrai = JSON.parse(tmp);
+            let almacenaBien = localStorage.getItem('grupoBienes');
+            if(almacenaBien ){
+                let arrai = JSON.parse(almacenaBien );
                 let bienes = new Set(arrai);
-                bienes.add(flat1);
+                bienes.add(grupoBienes);
                 arrai = [...bienes];
-                localStorage.setItem('bienes', JSON.stringify(arrai));
+                localStorage.setItem('grupoBienes', JSON.stringify(arrai));
             }
             else{
                 let bienes = new Set(); // Conjunto de bienes (flats)
-                bienes.add(flat1);
+                bienes.add(grupoBienes);
                 // const arrai = Array.from(bienes);
                 const arrai = [...bienes];
-                localStorage.setItem('bienes', JSON.stringify(arrai));
+                localStorage.setItem('grupoBienes', JSON.stringify(arrai));
             }
-            alert('Bien almacenado!!');
+
+            alert('Propiedad Registrada');
         }
 
     </script>

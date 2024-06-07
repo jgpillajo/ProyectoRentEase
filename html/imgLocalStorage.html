@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardar Imágenes en LocalStorage</title>
+</head>
+<body>
+    <h1>Subir y Guardar Imagen en LocalStorage</h1>
+    <form id="imageForm">
+        <label for="imageInput">Seleccione una imagen:</label>
+        <input type="file" id="imageInput" accept="image/*" required><br><br>
+        <button type="button" onclick="guardarImagen()">Guardar Imagen</button>
+        <p id="message" style="color: green; display: none;">Imagen guardada correctamente.</p>
+    </form>
+    <h2>Imagen Guardada</h2>
+    <img id="storedImage" alt="Imagen guardada en LocalStorage" style="display: none;">
+
+    <script>
+        function guardarImagen() {
+            const input = document.getElementById('imageInput');
+            const file = input.files[0];
+            const message = document.getElementById('message');
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(event) {
+                    const base64Image = event.target.result;
+                    
+                    // Guardar la imagen en base64 en localStorage
+                    localStorage.setItem('storedImage', base64Image);
+
+                    // Mostrar mensaje de éxito
+                    message.style.display = 'block';
+
+                    // Mostrar la imagen guardada
+                    mostrarImagenGuardada();
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function mostrarImagenGuardada() {
+            const storedImage = localStorage.getItem('storedImage');
+            const imgElement = document.getElementById('storedImage');
+
+            if (storedImage) {
+                imgElement.src = storedImage;
+                imgElement.style.display = 'block';
+            } else {
+                imgElement.style.display = 'none';
+            }
+        }
+
+        // Mostrar la imagen guardada al cargar la página
+        window.onload = function() {
+            mostrarImagenGuardada();
+        };
+    </script>
+</body>
+</html>
