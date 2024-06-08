@@ -17,9 +17,9 @@
             <br>
     <form action="">
         <label class="letra" for="">Ciudad:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Ciudad" placeholder="Ingrese una ciudad"minlength="2" maxlength="10" autofocus required /> <br><br>
+        <input class="inputs-medidas inputs" type="text" id="Ciudad" placeholder="Ingrese una ciudad"minlength="2" maxlength="20" autofocus required /> <br><br>
         <label class="letra" for="">Dirección:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Direccion" placeholder="Ingrese dirección" minlength="2" maxlength="10"/><br><br>
+        <input class="inputs-medidas inputs" type="text" id="Direccion" placeholder="Ingrese dirección" minlength="2" maxlength="20"/><br><br>
         <label class="letra" for="">Numeración domiciliaria:</label><br>
         <input class="inputs-medidas inputs" type="text" id="NumeracionBien" placeholder="Ingrese el número del bien" minlength="2" maxlength="10"/><br><br>
         <label class="letra" for="">Área Total:</label><br>
@@ -36,7 +36,7 @@
         <br>
         <br>
     </form>
-    <button class="inputs-medidas inputs" type="submit" onclick="ValidarSoloLetras();ValidadFlat()">Registrar Propiedad</button>
+    <button class="inputs-medidas inputs" type="submit" onclick="ValidarSoloLetrasCiudad();ValidarSoloNumeros();ValidadFlat()">Registrar Propiedad</button>
 
 </div>
 <script src="/javascript/funcionesflat.js" type="text/javascript"></script>
@@ -57,7 +57,8 @@
         ac: '',
         year: '',
         price:'',
-        date:''
+        date:'',
+        favorite:"1"
         }
 
             let city = document.getElementById('Ciudad').value;
@@ -68,15 +69,16 @@
             let year= document.getElementById('Anio').value;
             let price = document.getElementById('Precio').value;
             let date= document.getElementById('Disponible').value;
+           
             
-            flat = {city, streetname, streetnumber ,size ,ac ,year ,price ,date};
+            flat = {city, streetname, streetnumber ,size ,ac ,year ,price ,date, favorite};
  
             let resultado = RegistrarFlat(flat); 
             if(resultado == "OK")
             {
-                alert("Bien reg");
+                alert("**Bien Registrado**");
                 console.log(resultado);
-              //document.location.href = "Login.html";
+              
             }
             else{
                 alert(resultado);
@@ -84,78 +86,7 @@
             
 
         }
-/*
-    var ValidadFlat = function(){
-            let ciudad = document.getElementById('Ciudad').value;
-            let direccion= document.getElementById('Direccion').value;
-            let bienNumero = document.getElementById('BienNumero').value;
-            let area = document.getElementById('Area').value;
-            let anio = document.getElementById('Anio').value;
-            let renta = document.getElementById('Renta').value;
-            let disponibilidad = document.getElementById('Disponible').value;
-            let aireacondicionado = document.querySelector('input[name=aire]:checked').value;
-            
-            
-            if(ciudad == "" || ciudad == undefined) {
-                alert('Ingrese la ciudad donde se encuentra la propiedad');
-                return false;
-            }
-            if(direccion == "" || direccion == undefined) {
-                alert('Ingrese la direccion donde se encuentra el bien');
-                return false;
-            }
-            if(bienNumero == "" || bienNumero == undefined) {
-                alert('Ingrese el numero del bien');
-                return false;
-            }
-            if(area == "" || area == undefined){
-                alert('Ingrese el área del bien');
-                return false;
-            }
-            if( anio== "" || anio == undefined){
-                alert('Ingrese el año de contruccion del bien');
-                return false;
-            }
-            if( renta== "" || renta == undefined) {
-                alert('Ingrese el valor de renta del bien');
-                return false;
-            }
-            if( disponibilidad== "" || disponibilidad == undefined) {
-                alert('Ingrese la disponibilidad del bien');
-                return false;
-            }
-            // Objeto Bienes
-            
-            var grupoBienes = {
-                City: ciudad, 
-                StreetName: direccion,
-                StreetNumber: bienNumero,
-                AreaSize: area,
-                HasAC:aireacondicionado,
-                YearBuilt: anio,
-                RentPrice: renta,
-                DateAvailable: disponibilidad,
-            }
 
-            let almacenaBien = localStorage.getItem('grupoBienes');
-            if(almacenaBien ){
-                let arrai = JSON.parse(almacenaBien );
-                let bienes = new Set(arrai);
-                bienes.add(grupoBienes);
-                arrai = [...bienes];
-                localStorage.setItem('grupoBienes', JSON.stringify(arrai));
-            }
-            else{
-                let bienes = new Set(); // Conjunto de bienes (flats)
-                bienes.add(grupoBienes);
-                // const arrai = Array.from(bienes);
-                const arrai = [...bienes];
-                localStorage.setItem('grupoBienes', JSON.stringify(arrai));
-            }
-
-            alert('Propiedad Registrada');
-        }
-        */
     </script>
 
 </body>

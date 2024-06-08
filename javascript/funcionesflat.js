@@ -10,10 +10,16 @@ var RegistrarFlat = function(flat){
             }
         }
 
-        if(!ValidarSoloLetras(flat.ciudad== false)){
-           // alert("Ciudad Invalida");
-            return "Campos Ciudad con formato incorrecto";
+
+        if(!ValidarSoloLetrasCiudad(flat.ciudad)){
+           
+            return "**El campo ciudad solo permite Letras**";
         }
+
+        if(!ValidarSoloNumeros(flat.numeroCalle && flat.area && flat.anio && flat.renta)){
+           
+             return "**El campo Numeracion domiciliaria, Area, Año y Precio solo permite Numeros**";
+         }
         // El usuario nunca existio dentor FOR
         flats.push(flat);
         localStorage.setItem('flats', JSON.stringify(flats));
@@ -21,9 +27,14 @@ var RegistrarFlat = function(flat){
     }
     else{
 
-        if(!ValidarSoloLetras(flat.ciudad== false)){
-            alert("Ciudad Invalida");
-            return "Ciudad con formato incorrecto";
+        if(!ValidarSoloNumeros(flat.numeroCalle && flat.area && flat.anio && flat.renta)){
+          
+             return "**El campo Numeracion domiciliaria, Area, Año y Precio solo permite Numeros**";
+         }
+
+        if(!ValidarSoloLetrasCiudad(flat.ciudad)){
+          
+            return "**El campo ciudad solo permite Letras**";
         }
         // La primera vez, no hay usuarios
         var flats = [];
@@ -33,17 +44,43 @@ var RegistrarFlat = function(flat){
     } 
 }
 
-function ValidarSoloLetras() {
+function ValidarSoloLetrasCiudad() {
     const ciudad = document.getElementById("Ciudad").value;
-    const patronCiudad = /^[A-Za-z\s]+$/;
-    const tieneFormatoCiudad = patronCiudad.test(ciudad);
+
+    const patronLetra = /^[A-Za-z\s]+$/;
+    
+    const tieneFormatoCiudad = patronLetra.test(ciudad);
+     
 
     if (tieneFormatoCiudad) {
-       // alert("Ciudad formato correcto!!");
+      
         return true;
-    } 
-    else {
-       // alert("Ciudad formato incorrecto");
+     } else {
+       
+        return false;
+    }
+    }
+
+function ValidarSoloNumeros() {
+
+    const numeroCalle = document.getElementById("NumeracionBien").value;
+    const area = document.getElementById("Area").value;
+    const anio=document.getElementById("Anio").value;
+    const renta=document.getElementById("Precio").value;
+
+    const patronNumeros = /^\d+$/;
+
+
+    const tieneFormatoStreetNumber = patronNumeros.test(numeroCalle);
+    const tieneFormatoSize= patronNumeros.test(area);
+    const tieneFormatoYear = patronNumeros.test(anio);
+    const tieneFormatoRenta = patronNumeros.test(renta);
+
+    if (tieneFormatoStreetNumber && tieneFormatoSize && tieneFormatoYear && tieneFormatoRenta) {
+       
+        return true;
+    } else {
+      
         return false;
     }
 }
