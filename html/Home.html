@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
+       <script src="/javascript/funciones_login.js" type="text/javascript"></script>
 </head>
 <body onload="DefinirUsuario();">
     <div id="mensaje"></div>
     <script>
         var DefinirUsuario = function(){
-            document.getElementById('mensaje').innerHTML = "Bienvenido " + localStorage.getItem('username');
+            document.getElementById('mensaje').innerHTML = "Bienvenido " + localStorage.getItem('users.username');
         }
     </script>
 </body>

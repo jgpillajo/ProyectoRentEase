@@ -11,7 +11,7 @@ var RegistrarFlat = function(flat){
         }
 
 
-        if(!ValidarSoloLetrasCiudad(flat.ciudad)){
+        if(!ValidarSoloLetras(flat.ciudad)){
            
             return "**El campo ciudad solo permite Letras**";
         }
@@ -32,7 +32,7 @@ var RegistrarFlat = function(flat){
              return "**El campo Numeracion domiciliaria, Area, Año y Precio solo permite Numeros**";
          }
 
-        if(!ValidarSoloLetrasCiudad(flat.ciudad)){
+        if(!ValidarSoloLetras(flat.ciudad)){
           
             return "**El campo ciudad solo permite Letras**";
         }
@@ -44,7 +44,7 @@ var RegistrarFlat = function(flat){
     } 
 }
 
-function ValidarSoloLetrasCiudad() {
+function ValidarSoloLetras() {
     const ciudad = document.getElementById("Ciudad").value;
 
     const patronLetra = /^[A-Za-z\s]+$/;

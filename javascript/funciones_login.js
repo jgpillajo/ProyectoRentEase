@@ -16,15 +16,22 @@ var RegistrarUsuario = function(user){
             }
         }
 
-        if(!ValidarEmail(user.correo== false)){
+        if(!ValidarSoloLetras(user.nombre && user.apellido)){
+           
+            return "**Los campos Nombre y Apellido solo permite Letras**";
+        }
+
+
+        if(!ValidarEmail(user.correo)){
             alert("Correo Invalido");
             return "El correo no tiene formato";
         }
 
-        if (!ValidarPassword(user.password== false)){
+        if (!ValidarPassword(user.password)){
             alert("Contraseña Insegura!!");
           return "La contraseña debe contener una letra mayuscula,una muniscula, un numero y un caracter especial. ";
         }
+        
         users.push(user);
         localStorage.setItem('users', JSON.stringify(users));
         alert("Contraseña Segura - Usuario registrado exitosamente");
@@ -32,12 +39,18 @@ var RegistrarUsuario = function(user){
         return "OK";
     }
     else{
-        if(!ValidarEmail(user.correo== false)){
+
+        if(!ValidarSoloLetras(user.nombre && user.apellido)){
+           
+            return "**Los campos Nombre y Apellido solo permite Letras**";
+        }
+
+        if(!ValidarEmail(user.correo)){
             alert("Correo Invalido");
             return "El correo no tiene formato";
         }
 
-        if (!ValidarPassword(user.password== false)) {
+        if (!ValidarPassword(user.password)) {
             alert("Contraseña Insegura!!");
             return "La contraseña debe contener una letra mayuscula,una muniscula, un numero y un caracter especial. ";
         }
@@ -80,6 +93,28 @@ var AutenticarUsuario = function(userAutenticado){
         return "No hay usuarios registrados";
     }
 }
+
+function ValidarSoloLetras() {
+   
+    const nombre = document.getElementById("Nombre").value;
+    const apellido = document.getElementById("Apellido").value;
+
+    const patronLetra = /^[A-Za-z\s]+$/;
+    
+    const tieneFormatoNombre = patronLetra.test(nombre);
+    const tieneFormatoApellido = patronLetra.test(apellido);
+
+     
+
+    if (tieneFormatoNombre && tieneFormatoApellido) {
+      
+        return true;
+     } else {
+       
+        return false;
+    }
+    }
+
 
 function ValidarPassword() {
     // Obtener el valor de la contraseña desde el campo de entrada
