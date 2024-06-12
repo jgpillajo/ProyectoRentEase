@@ -1,45 +1,28 @@
 var RegistrarFlat = function(flat){
-    var flats = JSON.parse(localStorage.getItem('flats')); // Etiqueta (nombre de variable)
+    var flats = JSON.parse(localStorage.getItem('flats')); 
     if(flats){
-        for(var i = 0; i < flats.length; i++){
-            var temporal = flats[i];
-            let {streetnumber}=temporal;
-            if(flat.streetnumber == streetnumber){
-                // break
-                return "Ya existe un inmueble registrado con la misma numeracion domiciliaria";
-            }
-        }
-
-
-        if(!ValidarSoloLetras(flat.ciudad)){
-           
+     if(!ValidarSoloLetras(flat.ciudad)){
             return "**El campo ciudad solo permite Letras**";
         }
-
         if(!ValidarSoloNumeros(flat.numeroCalle && flat.area && flat.anio && flat.renta)){
-           
              return "**El campo Numeracion domiciliaria, Area, Año y Precio solo permite Numeros**";
          }
-        // El usuario nunca existio dentor FOR
+        console.log("Registro FLAT")
         flats.push(flat);
         localStorage.setItem('flats', JSON.stringify(flats));
         return "OK";
     }
-    else{
-
-        if(!ValidarSoloNumeros(flat.numeroCalle && flat.area && flat.anio && flat.renta)){
-          
-             return "**El campo Numeracion domiciliaria, Area, Año y Precio solo permite Numeros**";
+     else{
+         if(!ValidarSoloNumeros(flat.numeroCalle && flat.area && flat.anio && flat.renta)){
+            return "**El campo Numeracion domiciliaria, Area, Año y Precio solo permite Numeros**";
          }
-
         if(!ValidarSoloLetras(flat.ciudad)){
-          
             return "**El campo ciudad solo permite Letras**";
-        }
-        // La primera vez, no hay usuarios
+        }  
         var flats = [];
         flats.push(flat);
         localStorage.setItem('flats', JSON.stringify(flats));
+        console.log("Registro flat por primera vez")
         return "OK";
     } 
 }
