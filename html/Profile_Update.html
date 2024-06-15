@@ -55,7 +55,7 @@
     <input type="text" id="correo" readonly><br>
 
     <label for="password">Password:</label>
-    <input type="password" id="clave" ><br>
+    <input type="password" name="password" id="clave" ><br>
     
     <button type="button" onclick="guardarUsuario()">Guardar</button>
 </form>
@@ -80,7 +80,7 @@
             document.getElementById('nombre').value = usuarioEncontrado.nombre;
             document.getElementById('apellido').value = usuarioEncontrado.apellido;
             document.getElementById('correo').value = usuarioEncontrado.correo;
-            document.getElementById('clave').value=usuarioEncontrado.password;
+            document.getElementById('clave').value=usuarioEncontrado.clave;
 
             // Mostrar el formulario
             document.getElementById('formularioUsuario').style.display = 'block';
@@ -96,7 +96,7 @@
         const nombre = document.getElementById('nombre').value;
         const apellido = document.getElementById('apellido').value;
         const correo = document.getElementById('correo').value;
-        const password = document.getElementById('clave').value;
+        const clave = document.getElementById('clave').value;
 
         // Buscar el índice del usuario en el array
         const indice = usuarios.findIndex(usuario => usuario.correo === correo);
@@ -105,7 +105,7 @@
         if (indice !== -1) {
             usuarios[indice].nombre = nombre;
             usuarios[indice].apellido = apellido;
-            usuarios[indice].password = password;
+            usuarios[indice].clave = clave;
 
             // Guardar el array actualizado en localStorage
             localStorage.setItem('usuariosGuardados', JSON.stringify(usuarios));
