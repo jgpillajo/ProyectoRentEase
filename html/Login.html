@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentEase - Login</title>
+    <link rel="stylesheet" href="/Styles/styles.css">
+</head>
+<body>
+    
+    <div class="contenedor">
+        <img class="logo-m" src="/img/logo.svg" alt="logo rentease">
+        <br>
+        <div class="login-form">
+            <h1>Iniciar Sesión</h1>
+            <br>
+            <div>
+                <label class="letra" for="">Email</label>
+                <br><br>    
+                <input class="inputs-medidas inputs" type="text" name="correo" id="username">
+                <p id="p1" class="campos-vacios no-display">¡ Escribe un e-mail !</p>
+                <p id="login-email-pass" class="campos-vacios no-display">Email o contraseña incorrectos</p>
+            </div>
+            <br>
+            <div>
+                <label class="letra" for="">Contraseña</label>
+                <br><br>
+                <input class="inputs-medidas inputs" type="password" name="password" id="password">
+                <p id="p2" class="campos-vacios no-display">¡ Escribe una contraseña !</p>
+            </div>
+            
+            <br><br>
+            <button class="boton inputs-medidas" type="submit" onclick="validarLogin();" >Entrar a RentEase</button>
+            <br><br>
+            <p class="letra">¿No eres usuario de RentEase? <a href="Register.html">Registrate</a></p>
+            <br>
+        </div>
+    </div>
+    
+    <div class="footer">
+        
+    </div>
+
+<script src="/javascript/funciones_login.js" type="text/javascript"></script>
+</body>
+</html>
