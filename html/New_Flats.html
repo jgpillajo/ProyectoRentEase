@@ -57,8 +57,7 @@
         ac: '',
         year: '',
         price:'',
-        date:'',
-        favorite:"1"
+        date:''
         }
 
             let city = document.getElementById('Ciudad').value;
@@ -71,7 +70,7 @@
             let date= document.getElementById('Disponible').value;
            
             
-            flat = {city, streetname, streetnumber ,size ,ac ,year ,price ,date, favorite};
+            flat = {city, streetname, streetnumber ,size ,ac ,year ,price ,date};
  
             let resultado = RegistrarFlat(flat); 
             if(resultado == "OK")
