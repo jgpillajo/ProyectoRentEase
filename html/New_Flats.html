@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/Styles/styles.css">
     <script src="/javascript/funcionesflat.js" type="text/javascript"></script>
 </head>
+
+
+    <div id="usuario"></div>
 <body onload="DefinirUsuario();">
     <nav>
         <img src="/img/logo.svg" alt="logo rentease">
@@ -15,14 +18,27 @@
             <a href="./All_Flats.html">All Flats</a>
             <a href="./New_Flats.html">New Flat</a>
             <a href="./Profile_Update.html">Profile update</a>
+            <a href="/html/Login.html">Cerrar Sesion</a>
         </div>
     </nav>
 
     <div id="mensaje"></div>
     <script>
-        var DefinirUsuario = function(){
-            document.getElementById('mensaje').innerHTML = "Bienvenido " + localStorage.getItem('usuarioLogged');
+        var DefinirUsuario = function() {
+            const usuario = localStorage.getItem('usuarioLogeado');
+            if (usuario) {
+                document.getElementById('mensaje').innerHTML = "Bienvenido " + usuario;
+                document.getElementById('usuario').value = usuario;
+
+            } else {
+                document.getElementById('mensaje').innerHTML = "No hay usuario logueado.";
+            }
         }
+        
+        // Llamar a la función cuando el documento esté completamente cargado
+        document.addEventListener('DOMContentLoaded', (event) => {
+            DefinirUsuario();
+        });
     </script>
 
 <div class="contenedor">
@@ -56,24 +72,27 @@
 
     <script>
  let ValidadFlat= function(){
-    let idRegistro = ['Ciudad', 'Direccion', 'NumeracionBien','Area', 'Aire', 'Anio','Precio','Disponible'];
+    let idRegistro = ['usuario','Ciudad', 'Direccion', 'NumeracionBien','Area', 'Aire', 'Anio','Precio','Disponible'];
     for(let item of idRegistro){
                 if(!document.getElementById(item).value){
                     alert(`El campo ${item} está vacio, por favor ingresa un dato válido`);
                     return;
                 }
             }
-        let flat = {
-        city: '',
-        streetname:'',
-        streetnumber: '',
-        size:'',
-        ac: '',
-        year: '',
-        price:'',
-        date:''
-        }
+            let flat = {
+            usuario:'',
+            city: '',
+            streetname:'',
+            streetnumber: '',
+            size:'',
+            ac: '',
+            year: '',
+            price:'',
+            date:'',
+           
+            }
 
+            let usuario= document.getElementById('usuario').value;
             let city = document.getElementById('Ciudad').value;
             let streetname= document.getElementById('Direccion').value;
             let streetnumber = document.getElementById('NumeracionBien').value;
@@ -83,8 +102,9 @@
             let price = document.getElementById('Precio').value;
             let date= document.getElementById('Disponible').value;
            
-            
-            flat = {city, streetname, streetnumber ,size ,ac ,year ,price ,date};
+           
+
+            flat = {usuario,city, streetname, streetnumber ,size ,ac ,year ,price ,date};
  
             let resultado = RegistrarFlat(flat); 
             if(resultado == "OK")

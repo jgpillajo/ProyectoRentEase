@@ -179,7 +179,8 @@ const autenticarUsuario = userLogin => {
 
 const usuarioEnSesion = useractual => {
   let usuarioLogged = useractual;
-  localStorage.setItem('usuarioLogged', JSON.stringify(usuarioLogged));
+  localStorage.setItem('usuarioLogeado', JSON.stringify(usuarioLogged));
+  console.log("usuario guardado en usuarioLogueado")
   return;
 };
 
@@ -190,8 +191,8 @@ const sesionActual = () => {
     document.location.href = 'Login.html';
   };
   if (
-    !JSON.parse(localStorage.getItem('usuarioLogged')) ||
-    JSON.parse(localStorage.getItem('usuarioLogged')) === ''
+    !JSON.parse(localStorage.getItem('usuarioLogueado')) ||
+    JSON.parse(localStorage.getItem('usuarioLogueado')) === ''
   ) {
     alert('Inicia sesión para poder ver la página');
     setTimeout(validarSesionActual, 1300);

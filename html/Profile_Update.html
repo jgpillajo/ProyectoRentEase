@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentEase</title>
+    <link rel="stylesheet" href="/Styles/styles.css">
+</head>
+
+    <input type="text" id="usuarioEditar" >
+
+    <button onclick="buscarUsuario()">Buscar</button>
+<body onload="DefinirUsuario();buscarUsuario()">
+    <nav>
+        <img src="/img/logo.svg" alt="logo rentease">
+        <div class="nav-bar">
+            <a href="./Home.html">Home</a>
+            <a href="./All_Flats.html">All Flats</a>
+            <a href="./New_Flats.html">New Flat</a>
+            <a href="./Profile_Update.html">Profile update</a>
+            <a href="/html/Login.html">Cerrar Sesion</a>
+        </div>
+    </nav>
+
+
+    <div id="mensaje"></div>
+
+    <h2>TU PERFIL</h2>
+    <script>
+        var DefinirUsuario = function() {
+            const usuario = localStorage.getItem('usuarioLogeado');
+            if (usuario) {
+                document.getElementById('mensaje').innerHTML = "Bienvenido " + usuario;
+                document.getElementById('usuarioEditar').value = usuario;
+
+            } else {
+                document.getElementById('mensaje').innerHTML = "No hay usuario logueado.";
+            }
+        }
+        
+        // Llamar a la función cuando el documento esté completamente cargado
+        document.addEventListener('DOMContentLoaded', (event) => {
+            DefinirUsuario();
+        });
+
+    </script> 
+
+<form id="formularioUsuario" style="display: none;">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre"><br>
+    
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido"><br>
+    
+    <label for="correo">Correo:</label>
+    <input type="text" id="correo" readonly><br>
+    
+    <button type="button" onclick="guardarUsuario()">Guardar</button>
+</form>
+
+<script>
+    var usuarios = [];
+
+    // Función para buscar el usuario y mostrar sus datos en el formulario
+    function buscarUsuario() {
+        // Obtener el correo del campo de entrada
+        const correoBuscar = document.getElementById('usuarioEditar').value;
+
+        // Recuperar el array de usuariosGuardados de localStorage y parsear el JSON
+        const usuariosJSON = localStorage.getItem('usuariosGuardados');
+        usuarios = usuariosJSON ? JSON.parse(usuariosJSON) : [];
+
+        // Buscar el usuario por correo
+        const usuarioEncontrado = usuarios.find(usuario => usuario.correo === correoBuscar);
+
+        // Mostrar los datos del usuario en el formulario si se encuentra
+        if (usuarioEncontrado) {
+            document.getElementById('nombre').value = usuarioEncontrado.nombre;
+            document.getElementById('apellido').value = usuarioEncontrado.apellido;
+            document.getElementById('correo').value = usuarioEncontrado.correo;
+
+            // Mostrar el formulario
+            document.getElementById('formularioUsuario').style.display = 'block';
+        } else {
+            alert('Usuario no encontrado');
+            document.getElementById('formularioUsuario').style.display = 'none';
+        }
+    }
+
+    // Función para guardar los datos editados del usuario en localStorage
+    function guardarUsuario() {
+        // Obtener los valores de los campos del formulario
+        const nombre = document.getElementById('nombre').value;
+        const apellido = document.getElementById('apellido').value;
+        const correo = document.getElementById('correo').value;
+
+        // Buscar el índice del usuario en el array
+        const indice = usuarios.findIndex(usuario => usuario.correo === correo);
+
+        // Actualizar los datos del usuario en el array
+        if (indice !== -1) {
+            usuarios[indice].nombre = nombre;
+            usuarios[indice].apellido = apellido;
+
+            // Guardar el array actualizado en localStorage
+            localStorage.setItem('usuariosGuardados', JSON.stringify(usuarios));
+
+            alert('Usuario actualizado exitosamente');
+        } else {
+            alert('Error al actualizar el usuario');
+        }
+    }
+</script>
+
+
+
+</body>
+</html>

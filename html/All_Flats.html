@@ -6,15 +6,133 @@
     <title>RentEase</title>
     <link rel="stylesheet" href="/Styles/styles.css">
 </head>
-<body>
+<label for="usuario">Usuario:</label>
+    <input type="text" id="usuario" readonly>
+<body onload="DefinirUsuario();">
     <nav>
-        <img src="/img/Logo.svg" alt="logo rentease">
+        <img src="/img/logo.svg" alt="logo rentease">
         <div class="nav-bar">
-            <a href="/html/Home.html">Home</a>
-            <a href="All_Flats.html">All Flats</a>
-            <a href="New_Flats.html">New Flat</a>
-            <a href="/html/Profile_Update.html">Profile update</a>
+            <a href="./Home.html">Home</a>
+            <a href="./All_Flats.html">All Flats</a>
+            <a href="./New_Flats.html">New Flat</a>
+            <a href="./Profile_Update.html">Profile update</a>
+            <a href="/html/Login.html">Cerrar Sesion</a>
         </div>
     </nav>
+
+
+    <div id="mensaje"></div>
+
+    <h2>TUS BIENES</h2>
+    <script>
+        var DefinirUsuario = function() {
+            const usuario = localStorage.getItem('usuarioLogeado');
+            if (usuario) {
+                document.getElementById('mensaje').innerHTML = "Bienvenido " + usuario;
+                document.getElementById('usuario').value = usuario;
+
+            } else {
+                document.getElementById('mensaje').innerHTML = "No hay usuario logueado.";
+            }
+        }
+        
+        // Llamar a la función cuando el documento esté completamente cargado
+        document.addEventListener('DOMContentLoaded', (event) => {
+            DefinirUsuario();
+        });
+    </script>
+
+
+<div>
+    <table id="data-table" border="1">
+        <thead>
+            <tr>
+                <th>Ciudad</th>
+                <th>Direccion</th>
+                <th>Numero de lote</th>
+                <th>Area de construcción</th>
+                <th>Aire Acondicionado</th>
+                <th>Precio de arrendamiento</th>
+                <th>Fecha Disponibilidad de arrendamiento</th>
+                <th>Favoritos</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las filas de datos se insertarán aquí dinámicamente -->
+        </tbody>
+    </table>
+
+    <script>
+        // Definir la función para mostrar los datos en la tabla
+        var mostrarDatosEnTabla = function() {
+
+            // Obtener el usuario del campo de entrada
+            const usuarioBuscado = document.getElementById('usuario').value;
+
+            // Recuperar el array de localStorage y parsear el JSON
+            const datosJSON = localStorage.getItem('flats');
+            const datos = datosJSON ? JSON.parse(datosJSON) : [];
+
+            // Filtrar los datos por el usuario
+            const datosFiltrados = datos.filter(item => item.usuario === usuarioBuscado);
+
+            // Seleccionar el cuerpo de la tabla
+            const tbody = document.querySelector('#data-table tbody');
+
+            // Limpiar el contenido previo del tbody
+            tbody.innerHTML = '';
+
+            // Iterar sobre el array y generar filas de la tabla
+            datosFiltrados.forEach((item,index) => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${item.city}</td>
+                    <td>${item.streetname}</td>
+                    <td>${item.streetnumber}</td>
+                    <td>${item.size}</td>
+                    <td>${item.ac}</td>
+                    <td>${item.price}</td>
+                    <td>${item.date}</td>
+                    <td> <button onclick="marcarFavorito(${index})">☆</button> </td>
+                `;
+                tbody.appendChild(fila);
+            });
+        };
+
+        // Función para marcar un elemento como favorito
+            var marcarFavorito = function(index) {
+            // Recuperar el array de localStorage y parsear el JSON
+            const datosJSON = localStorage.getItem('flats');
+            const datos = datosJSON ? JSON.parse(datosJSON) : [];
+
+            // Obtener el item seleccionado
+            const itemFavorito = datos[index];
+
+            // Recuperar o inicializar el array de favoritos en localStorage
+            const favoritosJSON = localStorage.getItem('flatsFavoritos');
+            const favoritos = favoritosJSON ? JSON.parse(favoritosJSON) : [];
+
+            // Agregar el item seleccionado al array de favoritos si no está ya en él
+            if (!favoritos.some(fav => fav.city === itemFavorito.city && fav.streetname === itemFavorito.streetname && fav.size === itemFavorito.size
+            && itemFavorito.ac===fav.ac && itemFavorito.price && itemFavorito.date === fav.date)) {
+                favoritos.push(itemFavorito);
+                localStorage.setItem('flatsFavoritos', JSON.stringify(favoritos));
+                alert("Guardado entre tus bienes favoritos");
+            }
+        };
+
+
+
+        // Llamar a la función cuando el documento esté completamente cargado
+        document.addEventListener('DOMContentLoaded', (event) => {
+            mostrarDatosEnTabla();
+        });
+    </script>
+
+
+</div>
+
+
 </body>
 </html>
