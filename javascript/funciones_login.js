@@ -11,8 +11,8 @@ var RegistrarUsuario = function(user){
             if(user.username == username){
                 // break
                 console.log(console.log('users: ' + users));
-                console.log("usuario ya existe");
-                return "Usuario ya existe";
+                console.log("**Usuario ya existe**");
+                return "**Usuario ya existe**";
             }
         }
 
@@ -23,18 +23,18 @@ var RegistrarUsuario = function(user){
 
 
         if(!ValidarEmail(user.correo)){
-            alert("Correo Invalido");
-            return "El correo no tiene formato";
+            alert("**Correo Invalido**");
+            return "**El correo no tiene formato**";
         }
 
         if (!ValidarPassword(user.password)){
-            alert("Contraseña Insegura!!");
-          return "La contraseña debe contener una letra mayuscula,una muniscula, un numero y un caracter especial. ";
+            alert("**Contraseña Insegura**");
+          return "**La contraseña debe contener una letra mayuscula,una muniscula, un numero y un caracter especial**";
         }
         
         users.push(user);
         localStorage.setItem('users', JSON.stringify(users));
-        alert("Contraseña Segura - Usuario registrado exitosamente");
+        alert("**Contraseña Segura - Usuario registrado exitosamente**");
       // alert("Usuario registrado exitosamente");
         return "OK";
     }
@@ -46,8 +46,8 @@ var RegistrarUsuario = function(user){
         }
 
         if(!ValidarEmail(user.correo)){
-            alert("Correo Invalido");
-            return "El correo no tiene formato";
+            alert("**Correo Invalido**");
+            return "**El correo no cumple con el formato**";
         }
 
         if (!ValidarPassword(user.password)) {
@@ -83,9 +83,6 @@ var AutenticarUsuario = function(userAutenticado){
             }
         }
         if(ExisteUsuario == false){
-            return "Usuario no encontrado";
-        }
-        else{
             return "Usuario/Clave no existen";
         }
     }
