@@ -319,3 +319,53 @@ const validarNewFLat = () => {
 
   registratNewFlat(flatObject);
 };
+
+function ValidarSoloLetras() {
+   
+  const nombre = document.getElementById("nombre").value;
+  const apellido = document.getElementById("apellido").value;
+
+  const patronLetra = /^[A-Za-z\s]+$/;
+  
+  const tieneFormatoNombre = patronLetra.test(nombre);
+  const tieneFormatoApellido = patronLetra.test(apellido);
+
+   
+
+  if (tieneFormatoNombre && tieneFormatoApellido) {
+    
+      return true;
+   } else {
+     
+      return false;
+  }
+  }
+
+
+function ValidarPassword() {
+  // Obtener el valor de la contraseña desde el campo de entrada
+  const password = document.getElementById("clave").value;
+  
+  // Definir los caracteres especiales, números, letras mayúsculas y letras minúsculas
+  const patronCaracterEspecial = /[!"#$%&'()*+,-./:;<=>?@_`{|}~]/;
+  const patronNumeros = /\d/;
+  const patroMayus = /[A-Z]/;
+  const patronMinus = /[a-z]/;
+
+  // Verificar si la contraseña contiene al menos un carácter especial, un número, una letra mayúscula y una letra minúscula
+  const tieneCaracterEspecial = patronCaracterEspecial.test(password);
+  const tieneNumero = patronNumeros .test(password);
+  const tieneMayus= patroMayus.test(password);
+  const tieneMinus = patronMinus.test(password);
+
+  if (tieneCaracterEspecial && tieneNumero && tieneMayus && tieneMinus) {
+  
+      return true;
+     
+  } 
+  else {
+   
+      return false;
+
+  }
+}
