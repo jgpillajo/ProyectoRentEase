@@ -179,7 +179,8 @@ const autenticarUsuario = userLogin => {
 
 const usuarioEnSesion = useractual => {
   let usuarioLogged = useractual;
-  localStorage.setItem('usuarioLogeado', JSON.stringify(usuarioLogged));
+  localStorage.setItem('usuarioLogeado',useractual);
+  //localStorage.setItem('usuarioLogeado', JSON.stringify(usuarioLogged));
   console.log("usuario guardado en usuarioLogueado")
   return;
 };
@@ -264,7 +265,7 @@ for (let [index, value] of provincias.entries()) {
   option.value = `${provinciasValue[index]}`;
   let provinciaText = `${value} `;
   option.innerHTML = provinciaText;
-  idProvincias.appendChild(option);
+ // idProvincias.appendChild(option);
 }
 
 //! New Flat
