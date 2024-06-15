@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="/Styles/styles.css">
+</head>
+<body>
+    <div class="contenedor">
+        <img class="logo-m" src="/img/logo.svg" alt="logo rentease">
+        <br>
+        <div class="login-form">
+            <h1>Nuevo Usuario</h1>
+            <br>
+            <div>
+                <label class="letra" for="">Nombre</label>
+                <br><br>
+                <input class="inputs-medidas inputs" type="text" name="nombres" id="nombre">
+                <p id="p1" class="campos-vacios no-display">¡Escribe tu nombre!</p>
+            </div>
+            <br>
+            <div>
+                <label class="letra" for="">Apellido</label>
+                <br><br>
+                <input class="inputs-medidas inputs" type="text" name="apellido" id="apellido">
+                <p id="p2" class="campos-vacios no-display">¡Escribe tu apellido!</p>
+            </div>
+            <br>
+            <div class="flex-center">
+                <label class="letra" for="">Fecha de Nacimiento</label>
+                <br>
+                <input class="inputs-medidas inputs" type="date" name="fecha" placeholder="dd-mm-yyyy" id="fecha">
+                <div>
+                    <p id="p3" class="campos-vacios no-display">¡Escoje tu fecha de nacimiento!</p>
+                    <p id="fecha-validacion" class="campos-vacios no-display">Debes ser mayor de edad para registrarte en RentEase</p>
+                </div>
+            </div>
+            <br>
+            <div>
+                <label class="letra" for="">E-mail</label>
+                <br><br>
+                <input class="inputs-medidas inputs" type="text" name="correo" id="correo">
+                <div>
+                <p id="p4" class="campos-vacios no-display">¡Escribe un correo!</p>
+                <p id="contenedor-correo" class="campos-vacios no-display">¡Correo ya registrado!</p>
+                </div>
+
+            </div>
+            <br>
+            <div>
+                <label class="letra" for="">Contraseña</label>
+                <br><br>
+                <input class="inputs-medidas inputs" type="password" name="password" id="clave" onkeyup="claveValidacion()">
+                <p id="p5" class="campos-vacios no-display">¡Escribe una contraseña!</p>
+                <p class="letra color-gris">Utiliza al menos <span>8 caracteres</span>,<br><span>1 caracter especial</span> y <span>1 número</span></p>
+            </div>
+            <br>
+            <button class="boton inputs-medidas" type="submit" onclick="validarRegister()">Registrarse en RentEase</button>
+            <br>
+        </div>
+    </div>
+    <div class="footer">
+    </div>
+
+    <script src="/javascript/funciones_login.js" type="text/javascript"></script>
+</body>
+</html>
