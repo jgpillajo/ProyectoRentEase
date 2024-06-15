@@ -21,10 +21,10 @@
         </div>
     </nav>
 
-
+   
     <div id="mensaje"></div>
 
-    <h2>TU PERFIL</h2>
+    
     <script>
         var DefinirUsuario = function() {
             const usuario = localStorage.getItem('usuarioLogeado');
@@ -43,20 +43,25 @@
         });
 
     </script> 
+        <div class="login-form">
+            <h2>TU PERFIL</h2>
+        <form  id="formularioUsuario" style="display: none;">
+            <label class="letra" for="nombre">Nombre:</label><br>
+            <input class="inputs-medidas inputs" type="text" id="nombre"><br><br>
+            
+            <label class="letra" for="apellido">Apellido:</label><br>
+            <input class="inputs-medidas inputs" type="text" id="apellido"><br><br>
 
-<form id="formularioUsuario" style="display: none;">
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre"><br>
-    
-    <label for="apellido">Apellido:</label>
-    <input type="text" id="apellido"><br>
-    
-    <label for="correo">Correo:</label>
-    <input type="text" id="correo" readonly><br>
-    
-    <button type="button" onclick="guardarUsuario()">Guardar</button>
-</form>
+            <labelclass="letra"  for="correo">Correo:</label><br>
+            <input class="inputs-medidas inputs" type="text" id="correo" readonly><br><br>
 
+            <label class="letra" for="password">Password:</label><br>
+            <input  class="inputs-medidas inputs" type="password" id="clave" ><br><br>
+            
+
+            <button class="inputs-medidas inputs" type="button" onclick="guardarUsuario()">Guardar</button>
+        </form>
+    </div>
 <script>
     var usuarios = [];
 
@@ -77,6 +82,7 @@
             document.getElementById('nombre').value = usuarioEncontrado.nombre;
             document.getElementById('apellido').value = usuarioEncontrado.apellido;
             document.getElementById('correo').value = usuarioEncontrado.correo;
+            document.getElementById('clave').value=usuarioEncontrado.password;
 
             // Mostrar el formulario
             document.getElementById('formularioUsuario').style.display = 'block';
@@ -91,7 +97,7 @@
         // Obtener los valores de los campos del formulario
         const nombre = document.getElementById('nombre').value;
         const apellido = document.getElementById('apellido').value;
-        const correo = document.getElementById('correo').value;
+        const password = document.getElementById('clave').value;
 
         // Buscar el índice del usuario en el array
         const indice = usuarios.findIndex(usuario => usuario.correo === correo);
@@ -100,6 +106,7 @@
         if (indice !== -1) {
             usuarios[indice].nombre = nombre;
             usuarios[indice].apellido = apellido;
+            usuarios[indice].password = password;
 
             // Guardar el array actualizado en localStorage
             localStorage.setItem('usuariosGuardados', JSON.stringify(usuarios));
