@@ -3,31 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Propiedad</title>
+    <title>RentEase</title>
     <link rel="stylesheet" href="/Styles/styles.css">
     <script src="/javascript/funciones_login.js" type="text/javascript"></script>
 </head>
 
+    <input type="text" id="usuarioEditar" >
 
 <body onload="DefinirUsuario();buscarUsuario()">
     <nav>
         <img src="/img/logo.svg" alt="logo rentease">
         <div class="nav-bar">
             <a href="./Home.html">Home</a>
-            <a href="./All_Flats.html">Mis Flats</a>
+            <a href="./All_Flats.html">All Flats</a>
             <a href="./New_Flats.html">New Flat</a>
             <a href="./Profile_Update.html">Profile update</a>
             <a href="/html/Login.html">Cerrar Sesion</a>
         </div>
     </nav>
 
+
     <div id="mensaje"></div>
+
+    <h2>TU PERFIL</h2>
     <script>
         var DefinirUsuario = function() {
             const usuario = localStorage.getItem('usuarioLogeado');
             if (usuario) {
                 document.getElementById('mensaje').innerHTML = "Bienvenido " + usuario;
-                document.getElementById('usuario').value = usuario;
+                document.getElementById('usuarioEditar').value = usuario;
 
             } else {
                 document.getElementById('mensaje').innerHTML = "No hay usuario logueado.";
@@ -38,7 +42,8 @@
         document.addEventListener('DOMContentLoaded', (event) => {
             DefinirUsuario();
         });
-    </script>
+
+    </script> 
 
 <form id="formularioUsuario" style="display: none;">
     <label for="nombre">Nombre:</label>
@@ -76,6 +81,7 @@
             document.getElementById('nombre').value = usuarioEncontrado.nombre;
             document.getElementById('apellido').value = usuarioEncontrado.apellido;
             document.getElementById('correo').value = usuarioEncontrado.correo;
+            document.getElementById('clave').value=usuarioEncontrado.clave;
 
             // Mostrar el formulario
             document.getElementById('formularioUsuario').style.display = 'block';
@@ -91,23 +97,32 @@
         const nombre = document.getElementById('nombre').value;
         const apellido = document.getElementById('apellido').value;
         const correo = document.getElementById('correo').value;
+        const clave = document.getElementById('clave').value;
 
         // Buscar el índice del usuario en el array
         const indice = usuarios.findIndex(usuario => usuario.correo === correo);
 
+        if(!ValidarSoloLetras() == false){
+
         // Actualizar los datos del usuario en el array
-        if (indice !== -1) {
+        if (indice !== -1 && !ValidarPassword()==false) {
             usuarios[indice].nombre = nombre;
             usuarios[indice].apellido = apellido;
+            usuarios[indice].clave = clave;
 
             // Guardar el array actualizado en localStorage
             localStorage.setItem('usuariosGuardados', JSON.stringify(usuarios));
 
-            alert('Usuario actualizado exitosamente');
-        } else {
-            alert('Error al actualizar el usuario');
+            alert('**Usuario actualizado**');
+        }else{
+            alert('**Password Inseguro - Usuario NO actualizado**');
         }
-    }
+        }else {
+           
+       alert('**Los campos Nombre y Apellido solo permite el ingreso de letras- Usuario NO actualizado**');
+         }
+        }
+        
 </script>
 
 
