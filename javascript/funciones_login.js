@@ -368,3 +368,26 @@ function ValidarPassword() {
 
   }
 }
+
+
+function buscarNombre() {
+  // Obtener el correo del campo de entrada
+  const correoBuscar = document.getElementById('username').value;
+
+  // Recuperar el array de datos de localStorage y parsear el JSON
+  const datosJSON = localStorage.getItem('usuariosGuardados');
+  const datos = datosJSON ? JSON.parse(datosJSON) : [];
+
+  // Buscar el usuario por correo
+  const usuarioEncontrado = datos.find(usuario => usuario.correo === correoBuscar);
+
+  // Mostrar el nombre del usuario si se encuentra
+  if (usuarioEncontrado) {
+    const nombre = usuarioEncontrado.nombre;
+      document.getElementById('resultadoNombre').textContent = `Nombre: ${usuarioEncontrado.nombre}`;
+      localStorage.setItem('NombreLogueado',nombre);
+
+  } else {
+      document.getElementById('resultadoNombre').textContent = 'Usuario no encontrado';
+  }
+}
