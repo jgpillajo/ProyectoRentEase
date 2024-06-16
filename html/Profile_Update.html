@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Propiedad</title>
     <link rel="stylesheet" href="/Styles/styles.css">
-    <script src="/javascript/funcionesflat.js" type="text/javascript"></script>
+    <script src="/javascript/funciones_login.js" type="text/javascript"></script>
 </head>
 
 
-    <div id="usuario"></div>
-<body onload="DefinirUsuario();">
+<body onload="DefinirUsuario();buscarUsuario()">
     <nav>
         <img src="/img/logo.svg" alt="logo rentease">
         <div class="nav-bar">
@@ -41,86 +40,77 @@
         });
     </script>
 
-<div class="contenedor">
-    <div class="login-form">
-    <form>
-        <label class="letra" for="">Ciudad:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Ciudad" placeholder="Ingrese una ciudad"minlength="2" maxlength="20" autofocus required /> <br><br>
-        <label class="letra" for="">Dirección:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Direccion" placeholder="Ingrese dirección" minlength="2" maxlength="20"/><br><br>
-        <label class="letra" for="">Numeración domiciliaria:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="NumeracionBien" placeholder="Ingrese el número del bien" minlength="2" maxlength="10"/><br><br>
-        <label class="letra" for="">Área Total:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Area" placeholder="Ingrese el área" minlength="2" maxlength="10"/><br><br>
-        <label class="" for="aire"> Dispone de Aire Acondicionado ?</label> <br>
-        <input  type="radio" id="Aire" name="aire" value="SI" /> SI
-        <input type="radio" id="Aire" name="aire" value="NO" checked="" /> NO <br><br>
-        <label class="letra" for="">Año de construcción:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Anio" placeholder="Ingrese el año de construcción"minlength="2" maxlength="10" /><br><br>
-        <label class="letra" for="">Precio de arrendamiento:</label><br>
-        <input class="inputs-medidas inputs" type="text" id="Precio" placeholder="Ingrese el precio" minlength="2" maxlength="10"/><br><br>
-        <label class="letra" for="">Disponibilidad de arriendo:</label><br>
-        <input class="inputs-medidas inputs" type="date" name="edad" id="Disponible" required>
-        <br>
-        <br>
-    </form>
+<form id="formularioUsuario" style="display: none;">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre"><br>
+    
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido"><br>
+    
+    <label for="correo">Correo:</label>
+    <input type="text" id="correo" readonly><br>
 
-</div>
-    <button class="inputs-medidas inputs" type="submit" onclick="ValidarSoloLetras();ValidarSoloNumeros();ValidadFlat()">Registrar Propiedad</button>
-</div>
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="clave" ><br>
+    
+    <button type="button" onclick="ValidarSoloLetras();guardarUsuario()">Guardar</button>
+</form>
 
+<script>
+    var usuarios = [];
 
-    <script>
- let ValidadFlat= function(){
-    let idRegistro = ['usuario','Ciudad', 'Direccion', 'NumeracionBien','Area', 'Aire', 'Anio','Precio','Disponible'];
-    for(let item of idRegistro){
-                if(!document.getElementById(item).value){
-                    alert(`El campo ${item} está vacio, por favor ingresa un dato válido`);
-                    return;
-                }
-            }
-            let flat = {
-            usuario:'',
-            city: '',
-            streetname:'',
-            streetnumber: '',
-            size:'',
-            ac: '',
-            year: '',
-            price:'',
-            date:'',
-           
-            }
+    // Función para buscar el usuario y mostrar sus datos en el formulario
+    function buscarUsuario() {
+        // Obtener el correo del campo de entrada
+        const correoBuscar = document.getElementById('usuarioEditar').value;
 
-            let usuario= document.getElementById('usuario').value;
-            let city = document.getElementById('Ciudad').value;
-            let streetname= document.getElementById('Direccion').value;
-            let streetnumber = document.getElementById('NumeracionBien').value;
-            let size = document.getElementById('Area').value;
-            let ac = document.querySelector('input[name=aire]:checked').value;
-            let year= document.getElementById('Anio').value;
-            let price = document.getElementById('Precio').value;
-            let date= document.getElementById('Disponible').value;
-           
-           
+        // Recuperar el array de usuariosGuardados de localStorage y parsear el JSON
+        const usuariosJSON = localStorage.getItem('usuariosGuardados');
+        usuarios = usuariosJSON ? JSON.parse(usuariosJSON) : [];
 
-            flat = {usuario,city, streetname, streetnumber ,size ,ac ,year ,price ,date};
- 
-            let resultado = RegistrarFlat(flat); 
-            if(resultado == "OK")
-            {
-                alert("**Bien Registrado**");
-                console.log(resultado);
-              
-            }
-            else{
-                alert(resultado);
-            }
-            
+        // Buscar el usuario por correo
+        const usuarioEncontrado = usuarios.find(usuario => usuario.correo === correoBuscar);
 
+        // Mostrar los datos del usuario en el formulario si se encuentra
+        if (usuarioEncontrado) {
+            document.getElementById('nombre').value = usuarioEncontrado.nombre;
+            document.getElementById('apellido').value = usuarioEncontrado.apellido;
+            document.getElementById('correo').value = usuarioEncontrado.correo;
+
+            // Mostrar el formulario
+            document.getElementById('formularioUsuario').style.display = 'block';
+        } else {
+            alert('Usuario no encontrado');
+            document.getElementById('formularioUsuario').style.display = 'none';
         }
+    }
 
-    </script>
+    // Función para guardar los datos editados del usuario en localStorage
+    function guardarUsuario() {
+        // Obtener los valores de los campos del formulario
+        const nombre = document.getElementById('nombre').value;
+        const apellido = document.getElementById('apellido').value;
+        const correo = document.getElementById('correo').value;
+
+        // Buscar el índice del usuario en el array
+        const indice = usuarios.findIndex(usuario => usuario.correo === correo);
+
+        // Actualizar los datos del usuario en el array
+        if (indice !== -1) {
+            usuarios[indice].nombre = nombre;
+            usuarios[indice].apellido = apellido;
+
+            // Guardar el array actualizado en localStorage
+            localStorage.setItem('usuariosGuardados', JSON.stringify(usuarios));
+
+            alert('Usuario actualizado exitosamente');
+        } else {
+            alert('Error al actualizar el usuario');
+        }
+    }
+</script>
+
+
 
 </body>
 </html>

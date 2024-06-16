@@ -179,7 +179,8 @@ const autenticarUsuario = userLogin => {
 
 const usuarioEnSesion = useractual => {
   let usuarioLogged = useractual;
-  localStorage.setItem('usuarioLogeado', JSON.stringify(usuarioLogged));
+  localStorage.setItem('usuarioLogeado',useractual);
+  //localStorage.setItem('usuarioLogeado', JSON.stringify(usuarioLogged));
   console.log("usuario guardado en usuarioLogueado")
   return;
 };
@@ -264,7 +265,7 @@ for (let [index, value] of provincias.entries()) {
   option.value = `${provinciasValue[index]}`;
   let provinciaText = `${value} `;
   option.innerHTML = provinciaText;
-  idProvincias.appendChild(option);
+ // idProvincias.appendChild(option);
 }
 
 //! New Flat
@@ -318,3 +319,52 @@ const validarNewFLat = () => {
 
   registratNewFlat(flatObject);
 };
+
+function ValidarSoloLetras() {
+   
+  const nombre = document.getElementById("nombre").value;
+  const apellido = document.getElementById("apellido").value;
+
+  const patronLetra = /^[A-Za-z\s]+$/;
+  
+  const tieneFormatoNombre = patronLetra.test(nombre);
+  const tieneFormatoApellido = patronLetra.test(apellido);
+
+   
+
+  if (tieneFormatoNombre && tieneFormatoApellido) {
+    
+      return true;
+   } else {
+    
+      return false;
+  }
+  }
+
+
+function ValidarPassword() {
+  // Obtener el valor de la contraseña desde el campo de entrada
+  const password = document.getElementById("clave").value;
+  
+  // Definir los caracteres especiales, números, letras mayúsculas y letras minúsculas
+  const patronCaracterEspecial = /[!"#$%&'()*+,-./:;<=>?@_`{|}~]/;
+  const patronNumeros = /\d/;
+  const patroMayus = /[A-Z]/;
+  const patronMinus = /[a-z]/;
+
+  // Verificar si la contraseña contiene al menos un carácter especial, un número, una letra mayúscula y una letra minúscula
+  const tieneCaracterEspecial = patronCaracterEspecial.test(password);
+  const tieneNumero = patronNumeros .test(password);
+  const tieneMayus= patroMayus.test(password);
+  const tieneMinus = patronMinus.test(password);
+
+  if (tieneCaracterEspecial && tieneNumero && tieneMayus && tieneMinus) {
+    alert("**Password Seguro**");
+      return true;
+  } 
+  else {
+    
+      return false;
+
+  }
+}
