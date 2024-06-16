@@ -336,7 +336,7 @@ function ValidarSoloLetras() {
     
       return true;
    } else {
-     
+    
       return false;
   }
   }
@@ -359,12 +359,11 @@ function ValidarPassword() {
   const tieneMinus = patronMinus.test(password);
 
   if (tieneCaracterEspecial && tieneNumero && tieneMayus && tieneMinus) {
-  
+    alert("**Password Seguro**");
       return true;
-     
   } 
   else {
-   
+    
       return false;
 
   }
