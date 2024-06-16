@@ -115,6 +115,8 @@
             // Guardar el array actualizado en localStorage
             localStorage.setItem('usuariosGuardados', JSON.stringify(usuarios));
             alert('**Usuario actualizado - Se requiere Inicio de Sesion**');
+            localStorage.removeItem('usuarioLogeado');
+            localStorage.removeItem('NsuarioLogueado');
             document.location.href = 'Login.html';
 
     
