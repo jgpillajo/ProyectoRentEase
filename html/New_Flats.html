@@ -22,12 +22,14 @@
         </div>
     </nav>
 
-    <div id="mensaje"></div>
+    <div id="mensaje" hidden></div>
+    <div id="resultadoNombre"></div>
     <script>
         var DefinirUsuario = function() {
             const usuario = localStorage.getItem('usuarioLogeado');
             if (usuario) {
                 document.getElementById('mensaje').innerHTML = "Bienvenido " + usuario;
+                document.getElementById('resultadoNombre').innerHTML = "Bienvenido " + localStorage.getItem('NombreLogueado');
                 document.getElementById('usuario').value = usuario;
 
             } else {

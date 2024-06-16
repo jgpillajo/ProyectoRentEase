@@ -6,8 +6,8 @@
     <title>RentEase</title>
     <link rel="stylesheet" href="/Styles/styles.css">
 </head>
-<label for="usuario">Usuario:</label>
-    <input type="text" id="usuario" readonly>
+
+    <input type="text" id="usuario" readonly hidden>
 <body onload="DefinirUsuario();">
     <nav>
         <img src="/img/logo.svg" alt="logo rentease">
@@ -21,15 +21,18 @@
     </nav>
 
 
-    <div id="mensaje"></div>
+    <div id="mensaje" hidden></div>
+    <div id="resultadoNombre"></div>
 
     <h2>TUS BIENES</h2>
     <script>
         var DefinirUsuario = function() {
             const usuario = localStorage.getItem('usuarioLogeado');
             if (usuario) {
-                document.getElementById('mensaje').innerHTML = "Bienvenido " + usuario;
+                document.getElementById('mensaje').innerHTML = " " + usuario;
+                document.getElementById('resultadoNombre').innerHTML = "Bienvenido " + localStorage.getItem('NombreLogueado');
                 document.getElementById('usuario').value = usuario;
+
 
             } else {
                 document.getElementById('mensaje').innerHTML = "No hay usuario logueado.";

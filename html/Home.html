@@ -9,20 +9,23 @@
        <script src="/javascript/funcionesflat.js" type="text/javascript"></script>
 </head>
 <body onload="DefinirUsuario();">
+
     <nav>
         <img src="/img/logo.svg" alt="logo rentease">
         <div class="nav-bar">
             <a href="./Home.html">Home</a>
-            <a href="./All_Flats.html">All Flats</a>
+            <a href="./All_Flats.html">Mis Flats</a>
             <a href="./New_Flats.html">New Flat</a>
             <a href="./Profile_Update.html">Profile update</a>
         </div>
     </nav>
 
-    <div id="mensaje"></div>
+    <div id="mensaje" hidden></div>
+    <div id="resultadoNombre"></div>
     <script>
         var DefinirUsuario = function(){
-            document.getElementById('mensaje').innerHTML = "Bienvenido " + localStorage.getItem('usuarioLogeado');
+            document.getElementById('mensaje').innerHTML = "" + localStorage.getItem('usuarioLogeado');
+            document.getElementById('resultadoNombre').innerHTML = "Bienvenido " + localStorage.getItem('NombreLogueado');
         }
     </script>
 
