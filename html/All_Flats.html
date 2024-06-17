@@ -117,8 +117,12 @@
             const favoritos = favoritosJSON ? JSON.parse(favoritosJSON) : [];
 
             // Agregar el item seleccionado al array de favoritos si no está ya en él
-            if (!favoritos.some(fav => fav.city === itemFavorito.city && fav.streetname === itemFavorito.streetname && fav.size === itemFavorito.size
-            && itemFavorito.ac===fav.ac && itemFavorito.price && itemFavorito.date === fav.date)) {
+            if (!favoritos.some(fav => fav.city === itemFavorito.city 
+            && fav.streetname === itemFavorito.streetname 
+            && fav.size === itemFavorito.size
+            && fav.ac === itemFavorito.ac 
+            && fav.price === itemFavorito.price
+            && fav.date === itemFavorito.date)) {
                 favoritos.push(itemFavorito);
                 localStorage.setItem('flatsFavoritos', JSON.stringify(favoritos));
                 alert("Guardado entre tus bienes favoritos");
