@@ -14,9 +14,12 @@
 <input type="text" id="usuario" hidden>
 <body onload="DefinirUsuario();">
 
-    <nav>
-        <img src="/img/logo.svg" alt="logo rentease">
-        <div class="nav-bar" >
+
+    <div class="header">
+        <div>
+            <img class="logo-s" src="/img/logo.svg" alt="">
+        </div>
+        <div class="nav">
             <a id="resultadoNombre" class="fa fa-user" style='font-size:20px'></a>
             <a href="./Home.html" >Inicio</a>
             <a href="./All_Flats.html" >Mis Bienes</a>
@@ -24,7 +27,9 @@
             <a href="./Profile_Update.html" >Editar Perfil</a>
             <a href="/html/Login.html" onclick="cerrarSesion()" class="fa fa-arrow-right" style='font-size:20px'>Cerrar Sesion</a>
         </div>
-    </nav>
+    </div>
+
+        <img class="img-fondo" src="/img/casa1.webp" alt="">
 
     <div id="mensaje" hidden></div>
 
@@ -50,7 +55,7 @@
         });
     </script>
 
-        <h2>Flats Favoritos</h2>
+        <h2>Bienes Favoritos</h2>
         <table border="1" id="tablaFlats">
             <thead>
                 <tr>
