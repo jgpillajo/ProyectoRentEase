@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RentEase - Login</title>
     <link rel="stylesheet" href="/Styles/styles.css">
+   
+
 </head>
 <body>
     
@@ -14,6 +16,9 @@
         <div class="login-form">
             <h1>Iniciar Sesión</h1>
             <br>
+        
+             <p id="resultadoNombre" hidden></p>
+
             <div>
                 <label class="letra" for="">Email</label>
                 <br><br>    
@@ -28,9 +33,9 @@
                 <input class="inputs-medidas inputs" type="password" name="password" id="password">
                 <p id="p2" class="campos-vacios no-display">¡ Escribe una contraseña !</p>
             </div>
-            
+       
             <br><br>
-            <button class="boton inputs-medidas" type="submit" onclick="validarLogin();" >Entrar a RentEase</button>
+            <button class="boton inputs-medidas" type="submit" onclick="validarLogin();buscarNombre()" >Entrar a RentEase</button>
             <br><br>
             <p class="letra">¿No eres usuario de RentEase? <a href="Register.html">Registrate</a></p>
             <br>
