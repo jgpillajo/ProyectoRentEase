@@ -66,7 +66,7 @@
         </tbody>
     </table>
 
-    <script>
+    <script>      
         // Definir la función para mostrar los datos en la tabla
         var mostrarDatosEnTabla = function() {
 
@@ -97,7 +97,7 @@
                     <td>${item.ac}</td>
                     <td>${item.price}</td>
                     <td>${item.date}</td>
-                    <td> <button onclick="marcarFavorito(${index})">☆</button> </td>
+                    <td> <button onclick="marcarFavorito(${index})">⭐</button> </td>
                 `;
                 tbody.appendChild(fila);
             });
@@ -125,13 +125,11 @@
             && fav.date === itemFavorito.date)) {
                 favoritos.push(itemFavorito);
                 localStorage.setItem('flatsFavoritos', JSON.stringify(favoritos));
-                alert("Guardado entre tus bienes favoritos");
+                alert("**Bien seleccionado en favoritos**");
             }else{
-                alert("No Guardado");
+                alert("**Ya ha sido seleccionado como favorito**");
             }
         };
-
-
 
         // Llamar a la función cuando el documento esté completamente cargado
         document.addEventListener('DOMContentLoaded', (event) => {
