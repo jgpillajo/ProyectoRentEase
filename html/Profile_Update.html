@@ -23,16 +23,13 @@
             <a href="./All_Flats.html" >Mis Bienes</a>
             <a href="./New_Flats.html" >Registrar Nuevo Bien</a>
             <a href="./Profile_Update.html" >Editar Perfil</a>
-            <a href="/html/Login.html" onclick="cerrarSesion()" class="fa fa-arrow-right" style='font-size:20px'>Cerrar Sesion</a>
+            <a href="/html/Login.html" onclick="cerrarSesion()" class="fa fa-share-square" style='font-size:20px'>Cerrar Sesion</a>
         </div>
     </div>
-
-        <img class="img-fondo" src="/img/casa1.webp" alt="">
 
     <div id="mensaje" hidden></div>
     <div id="resultadoNombre" hidden></div>
 
-    <h2>TU PERFIL</h2>
     <script>
         var DefinirUsuario = function() {
             const usuario = localStorage.getItem('usuarioLogeado');
@@ -55,21 +52,27 @@
 
     </script> 
 
-<form id="formularioUsuario" style="display: none;">
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre"><br>
-    
-    <label for="apellido">Apellido:</label>
-    <input type="text" id="apellido"><br>
-    
-    <label for="correo">Correo:</label>
-    <input type="text" id="correo" readonly><br>
+    <div class="contenedor"> 
+        <div class="login-form">
+    <h2>Tu Perfil</h2>
 
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="clave" ><br>
-    
-    <button type="button" onclick="ValidarSoloLetras();guardarUsuario()">Guardar</button>
-</form>
+        <form id="formularioUsuario" style="display: none;">
+            <label class="letra" for="nombre">Nombre</label><br>
+            <input class="inputs-medidas inputs" type="text" id="nombre"><br><br>
+           
+            <label class="letra" for="apellido">Apellido</label><br>
+            <input class="inputs-medidas inputs" type="text" id="apellido"><br><br>
+            
+            <label class="letra"  for="correo">Correo</label><br>
+            <input class="inputs-medidas inputs" type="text" id="correo" readonly><br><br>
+
+            <label class="letra"  for="password">Password</label><br>
+            <input class="inputs-medidas inputs" type="password" name="password" id="clave" ><br><br>
+            
+            <button class="boton inputs-medidas"  type="button" onclick="ValidarSoloLetras();guardarUsuario()">Guardar</button>
+        </form>
+    </div>
+    </div>
 
 <script>
     var usuarios = [];

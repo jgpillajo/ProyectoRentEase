@@ -395,7 +395,7 @@ function buscarNombre() {
 function cerrarSesion(){
             localStorage.removeItem('NombreLogueado');
             localStorage.removeItem('usuarioLogeado');
-            localStorage.removeItem('flatsFavoritos');
+           localStorage.removeItem('flatsFavoritos');
             document.location.href = 'Login.html';
-            alert('**Saliendo**');   
+            alert('**Cerrando Sesion**');   
 }
