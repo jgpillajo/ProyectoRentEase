@@ -220,6 +220,7 @@ section {
   box-shadow: 0px 0px 3px 1px rgba(148, 148, 148, 1);
   margin-top: 10px;
   margin-bottom: 10px;
+  height: min-content;
 }
 
 .grid-flat-solo:hover {

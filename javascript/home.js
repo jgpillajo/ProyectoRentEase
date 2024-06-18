@@ -130,17 +130,54 @@ const filter = () => {
   let areaMin = document.getElementById('area-min').value;
   let areaMax = document.getElementById('area-max').value;
   let ciudades = document.getElementsByName('ciudades')[0].value;
-  if (!precioMin || !precioMax) {
-    let filterPrince = flatStorage.filter(e => e.area >= areaMin && e.area <= areaMax);
-    let filterPrice2 = filterPrince.filter(e => e.ciudad == ciudades);
-    creadorFlats(filterPrice2);
-  } else if (!areaMin || !areaMax) {
-    let filterArea = flatStorage.filter(e => e.precio >= precioMin && e.precio <= precioMax);
-    let filterArea2 = filterArea.filter(e => e.ciudad == ciudades);
-    creadorFlats(filterArea2);
+
+  let primero = filtro1(precioMin, flatStorage);
+  let segundo = filtro2(precioMax, primero);
+  let tercero = filtro3(areaMin, segundo);
+  let cuarto = filtro4(areaMax, tercero);
+  let quinto = filtro5(ciudades, cuarto);
+
+  creadorFlats(quinto);
+};
+
+const filtro1 = (value, array) => {
+  if (value !== '') {
+    let filtro = array.filter(e => e.precio >= value);
+    return filtro;
+  } else {
+    return array;
   }
-  let filter = flatStorage.filter(e => e.precio >= precioMin && e.precio <= precioMax);
-  let filter2 = filter.filter(e => e.area >= areaMin && e.area <= areaMax);
-  let filter3 = filter2.filter(e => e.ciudad == ciudades);
-  creadorFlats(filter3);
+};
+
+const filtro2 = (value, array) => {
+  if (value !== '') {
+    let filtro = array.filter(e => e.precio <= value);
+    return filtro;
+  } else {
+    return array;
+  }
+};
+const filtro3 = (value, array) => {
+  if (value !== '') {
+    let filtro = array.filter(e => e.area >= value);
+    return filtro;
+  } else {
+    return array;
+  }
+};
+const filtro4 = (value, array) => {
+  if (value !== '') {
+    let filtro = array.filter(e => e.area <= value);
+    return filtro;
+  } else {
+    return array;
+  }
+};
+const filtro5 = (value, array) => {
+  if (value !== '') {
+    let filtro = array.filter(e => e.ciudad == value);
+    return filtro;
+  } else {
+    return array;
+  }
 };
