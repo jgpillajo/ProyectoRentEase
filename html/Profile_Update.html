@@ -14,10 +14,11 @@
     <nav>
         <img src="/img/logo.svg" alt="logo rentease">
         <div class="nav-bar">
-            <a href="./Home.html">Home</a>
-            <a href="./All_Flats.html">All Flats</a>
-            <a href="./New_Flats.html">New Flat</a>
-            <a href="./Profile_Update.html">Profile update</a>
+            <a id="resultadoNombre"></a>
+            <a href="./Home.html">Inicio</a>
+            <a href="./All_Flats.html">Mis Bienes</a>
+            <a href="./New_Flats.html">Registrar Nuevo Bien</a>
+            <a href="./Profile_Update.html">Editar Perfil</a>
             <a href="/html/Login.html">Cerrar Sesion</a>
         </div>
     </nav>
@@ -36,7 +37,9 @@
                 document.getElementById('usuarioEditar').value = usuario;
 
             } else {
-                document.getElementById('mensaje').innerHTML = "No hay usuario logueado.";
+              
+                alert("**No hay usuario Logueado**");
+                document.location.href = 'Login.html';
             }
         }
         
@@ -88,7 +91,7 @@
             // Mostrar el formulario
             document.getElementById('formularioUsuario').style.display = 'block';
         } else {
-            alert('Usuario no encontrado');
+           // alert('Usuario no encontrado');
             document.getElementById('formularioUsuario').style.display = 'none';
         }
     }
@@ -116,9 +119,10 @@
             localStorage.setItem('usuariosGuardados', JSON.stringify(usuarios));
             alert('**Usuario actualizado - Se requiere Inicio de Sesion**');
             localStorage.removeItem('usuarioLogeado');
+            localStorage.removeItem('NombreLogueado');
             localStorage.removeItem('flatsFavoritos');
             document.location.href = 'Login.html';
-            alert('**Saliendo**');
+            
 
     
         }else{

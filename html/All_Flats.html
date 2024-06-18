@@ -7,22 +7,23 @@
     <link rel="stylesheet" href="/Styles/styles.css">
 </head>
 
-    <input type="text" id="usuario" readonly hidden>
+    <input type="text" id="usuario" hidden>
 <body onload="DefinirUsuario();">
     <nav>
         <img src="/img/logo.svg" alt="logo rentease">
         <div class="nav-bar">
-            <a href="./Home.html">Home</a>
-            <a href="./All_Flats.html">Mis Flats</a>
-            <a href="./New_Flats.html">New Flat</a>
-            <a href="./Profile_Update.html">Profile update</a>
-            <a href="/html/Login.html">Cerrar Sesion</a>
+            <a id="resultadoNombre"></a>
+            <a href="./Home.html">Inicio</a>
+            <a href="./All_Flats.html">Mis Bienes</a>
+            <a href="./New_Flats.html">Registrar Nuevo Bien</a>
+            <a href="./Profile_Update.html">Editar Perfil</a>
+            <a href="/html/Login.html" onclick="cerrarSesion()">Cerrar Sesion</a>
         </div>
     </nav>
 
 
     <div id="mensaje" hidden></div>
-    <div id="resultadoNombre"></div>
+    
 
     <h2>TUS BIENES</h2>
     <script>
@@ -35,7 +36,9 @@
 
 
             } else {
-                document.getElementById('mensaje').innerHTML = "No hay usuario logueado.";
+              
+                alert("**No hay usuario Logueado**");
+                document.location.href = 'Login.html';
             }
         }
         

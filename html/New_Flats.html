@@ -14,10 +14,11 @@
     <nav>
         <img src="/img/logo.svg" alt="logo rentease">
         <div class="nav-bar">
-            <a href="./Home.html">Home</a>
-            <a href="./All_Flats.html">Mis Flats</a>
-            <a href="./New_Flats.html">New Flat</a>
-            <a href="./Profile_Update.html">Profile update</a>
+            <a id="resultadoNombre"></a>
+            <a href="./Home.html">Inicio</a>
+            <a href="./All_Flats.html">Mis Bienes</a>
+            <a href="./New_Flats.html">Registrar Nuevo Bien</a>
+            <a href="./Profile_Update.html">Editar Perfil</a>
             <a href="/html/Login.html">Cerrar Sesion</a>
         </div>
     </nav>
@@ -28,13 +29,14 @@
         var DefinirUsuario = function() {
             const usuario = localStorage.getItem('usuarioLogeado');
             if (usuario) {
-                document.getElementById('mensaje').innerHTML = "Bienvenido " + usuario;
+                document.getElementById('mensaje').innerHTML = " " + usuario;
                 document.getElementById('resultadoNombre').innerHTML = "Bienvenido " + localStorage.getItem('NombreLogueado');
                 document.getElementById('usuario').value = usuario;
 
             } else {
-               // document.getElementById('mensaje').innerHTML = "No hay usuario logueado.";
-                alert("No hay usuario Logueado");
+              
+                alert("**No hay usuario Logueado**");
+                document.location.href = 'Login.html';
             }
         }
         
