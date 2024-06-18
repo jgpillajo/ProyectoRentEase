@@ -29,6 +29,76 @@
         }
     </script>
 
+        <h2>Flats Favoritos</h2>
+        <table border="1" id="tablaFlats">
+            <thead>
+                <tr>
+                    <th>Ciudad</th>
+                    <th>Dirección</th>
+                    <th>Numero de lote</th>
+                    <th>Area construcción</th>
+                    <th>Aire Acondicionado</th>
+                    <th>Precio arrendamiento</th>
+                    <th>Fecha disponibilidad de arriendo</th>
+                    <th>Favorito?</th>    
+                    </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos se llenarán dinámicamente -->
+            </tbody>
+        </table>
+
+
+        <script>
+            // Función para cargar los datos del localStorage y mostrarlos en la tabla
+            function cargarFavoritos() {
+                // Recuperar los datos de localStorage
+                const datosJSON = localStorage.getItem('flatsFavoritos');
+                const datos = datosJSON ? JSON.parse(datosJSON) : [];
+    
+                // Referencia a la tabla
+                const tabla = document.getElementById('tablaFlats').getElementsByTagName('tbody')[0];
+                tabla.innerHTML = ''; // Limpiar la tabla
+    
+                // Llenar la tabla con los datos
+                datos.forEach((dato, indice) => {
+                    const fila = tabla.insertRow();
+                    fila.insertCell(0).textContent = dato.city;
+                    fila.insertCell(1).textContent = dato.streetnumber;
+                    fila.insertCell(2).textContent = dato.streetname;
+                    fila.insertCell(3).textContent = dato.size;
+                    fila.insertCell(4).textContent = dato.ac;
+                    fila.insertCell(5).textContent = dato.price;
+                    fila.insertCell(6).textContent = dato.date;
+
+    
+                    // Crear botón de eliminar
+                    const botonEliminar = document.createElement('button');
+                    botonEliminar.textContent = '❌';
+                    botonEliminar.onclick = () => eliminarFavorito(indice);
+                    fila.insertCell(7).appendChild(botonEliminar);
+                });
+            }
+    
+            // Función para eliminar un elemento de favoritos y actualizar localStorage
+            function eliminarFavorito(indice) {
+                // Recuperar los datos de localStorage
+                const datosJSON = localStorage.getItem('flatsFavoritos');
+                const datos = datosJSON ? JSON.parse(datosJSON) : [];
+    
+                // Eliminar el elemento del array
+                datos.splice(indice, 1);
+    
+                // Guardar los datos actualizados en localStorage
+                localStorage.setItem('flatsFavoritos', JSON.stringify(datos));
+    
+                alert('Elemento eliminado de favoritos');
+                cargarFavoritos(); // Recargar la tabla
+            }
+    
+            // Llamar a la función cargarDatos cuando la página se cargue
+            window.onload = cargarFavoritos;
+        </script>
 
 </body>
 </html>
