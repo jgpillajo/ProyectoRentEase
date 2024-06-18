@@ -123,7 +123,7 @@ const registrarUsuario = function (userRegister) {
 
 const claveValidacion = function () {
   let claveDigi = document.getElementById('clave').value;
-  let caracterSpecRegex = /([!@#$%^&*])/gm;
+  let caracterSpecRegex = /([!@#$%,<>;:?{})(-+.^&*])/gm;
   let numeroRegex = /([0-9])/gm;
   let caracteres8 = document.querySelectorAll('span');
   let verificador = [];
@@ -168,10 +168,7 @@ const autenticarUsuario = userLogin => {
     return;
   }
   for (let i = 0; i < usuarioStorage.length; i++) {
-    if (
-      usuarioStorage[i].correo === userLogin.username &&
-      usuarioStorage[i].clave === userLogin.password
-    ) {
+    if (usuarioStorage[i].correo === userLogin.username && usuarioStorage[i].clave === userLogin.password) {
       return 'Credenciales correctas';
     }
   }
@@ -189,10 +186,7 @@ const sesionActual = () => {
   const validarSesionActual = () => {
     document.location.href = 'Login.html';
   };
-  if (
-    !JSON.parse(localStorage.getItem('usuarioLogged')) ||
-    JSON.parse(localStorage.getItem('usuarioLogged')) === ''
-  ) {
+  if (!JSON.parse(localStorage.getItem('usuarioLogged')) || JSON.parse(localStorage.getItem('usuarioLogged')) === '') {
     alert('Inicia sesión para poder ver la página');
     setTimeout(validarSesionActual, 1300);
   } else {
@@ -202,59 +196,9 @@ const sesionActual = () => {
 
 //! Provincias Ec
 
-let provincias = [
-  'Azuay',
-  'Bolívar',
-  'Cañar',
-  'Carchi',
-  'Chimborazo',
-  'Cotopaxi',
-  'El Oro',
-  'Esmeraldas',
-  'Galápagos',
-  'Guayas',
-  'Imbabura',
-  'Loja',
-  'Los Ríos',
-  'Manabí',
-  'Morona-Santiago',
-  'Napo',
-  'Orellana',
-  'Pastaza',
-  'Pichincha',
-  'Santa Elena',
-  'Santo Domingo de los Tsáchilas',
-  'Sucumbíos',
-  'Tungurahua',
-  'Zamora-Chinchipe',
-];
+/* let provincias = ['Azuay', 'Bolívar', 'Cañar', 'Carchi', 'Chimborazo', 'Cotopaxi', 'El Oro', 'Esmeraldas', 'Galápagos', 'Guayas', 'Imbabura', 'Loja', 'Los Ríos', 'Manabí', 'Morona-Santiago', 'Napo', 'Orellana', 'Pastaza', 'Pichincha', 'Santa Elena', 'Santo Domingo de los Tsáchilas', 'Sucumbíos', 'Tungurahua', 'Zamora-Chinchipe'];
 
-let provinciasValue = [
-  'Azuay',
-  'Bolivar',
-  'Canar',
-  'Carchi',
-  'Chimborazo',
-  'Cotopaxi',
-  'El Oro',
-  'Esmeraldas',
-  'Galapagos',
-  'Guayas',
-  'Imbabura',
-  'Loja',
-  'Los Rios',
-  'Manabi',
-  'Morona-Santiago',
-  'Napo',
-  'Orellana',
-  'Pastaza',
-  'Pichincha',
-  'Santa Elena',
-  'Santo Domingo de los Tsachilas',
-  'Sucumbios',
-  'Tungurahua',
-  'Zamora-Chinchipe',
-];
+let provinciasValue = ['Azuay', 'Bolivar', 'Canar', 'Carchi', 'Chimborazo', 'Cotopaxi', 'El Oro', 'Esmeraldas', 'Galapagos', 'Guayas', 'Imbabura', 'Loja', 'Los Rios', 'Manabi', 'Morona-Santiago', 'Napo', 'Orellana', 'Pastaza', 'Pichincha', 'Santa Elena', 'Santo Domingo de los Tsachilas', 'Sucumbios', 'Tungurahua', 'Zamora-Chinchipe'];
 
 let idProvincias = document.getElementById('provincia');
 
@@ -263,12 +207,12 @@ for (let [index, value] of provincias.entries()) {
   option.value = `${provinciasValue[index]}`;
   let provinciaText = `${value} `;
   option.innerHTML = provinciaText;
-  idProvincias.appendChild(option);
-}
+  idProvincias.appendChild(option); 
+}*/
 
 //! New Flat
 
-const registratNewFlat = newFlat => {
+/* const registratNewFlat = newFlat => {
   let flatStorage = JSON.parse(localStorage.getItem('flatStorage'));
   if (!flatStorage) {
     let flatArray = [];
@@ -290,9 +234,9 @@ const validarNewFLat = () => {
     'disponibilidad',
   ];
   let parrafos = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9'];
-  /*   if (!validarCamposVacios(idFlat, parrafos)) {
+    if (!validarCamposVacios(idFlat, parrafos)) {
     return;
-  } */
+  }
   let provincia = document.getElementById('provincia').value;
   let ciudad = document.getElementById('ciudad').value;
   let direccion = document.getElementById('direccion').value;
@@ -316,4 +260,4 @@ const validarNewFLat = () => {
   };
 
   registratNewFlat(flatObject);
-};
+}; */

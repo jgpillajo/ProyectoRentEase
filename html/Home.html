@@ -4,13 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME</title>
+    <link rel="stylesheet" href="/Styles/styles.css">
 </head>
-<body onload="DefinirUsuario();">
-    <div id="mensaje"></div>
-    <script>
-        var DefinirUsuario = function(){
-            document.getElementById('mensaje').innerHTML = "Bienvenido " + localStorage.getItem('username');
-        }
-    </script>
+<!-- onload="sesionActual()" -->
+<body >
+    <div class="header">
+        <div>
+            <img class="logo-s" src="/img/logo.svg" alt="">
+        </div>
+        <div class="nav">
+            <a href="">Bienvenido ....</a>
+            <a href="">Nueva Propiedad</a>
+            <a href="">Favoritos</a>
+            <button>Cerrar Sesión</button>
+        </div>
+    </div>
+
+        <img class="img-fondo" src="/img/casa1.webp" alt="">
+    </section>
+    <section>
+        <div class="nav-ordenar">
+            <p>Ordenar por: </p>
+            <input class="boton-ordenar" type="button" value="Ciudad" onclick="getvalue(this)">
+            <input class="boton-ordenar" type="button" value="Precio" onclick="getvalue(this)">
+            <input class="boton-ordenar" type="button" value="Área" onclick="getvalue(this)">
+        </div>
+        <div class="contenedor-filtros">
+            <div class="filtrar">
+                <div class="absolute">
+                    <label for="">Precio</label>
+                    <input id="precio-min" class="inputs inputs-medidas" type="number">
+                    <input id="precio-max" class="inputs inputs-medidas" type="number" placeholder="valor máximo - 100">
+                
+                    <label for="">Area</label>
+                    <input id="area-min" class="inputs inputs-medidas" type="number">
+                    <input id="area-max" class="inputs inputs-medidas" type="number">
+                    
+                    <label for="">Ciudad
+                        <input class="inputs inputs-medidas" list="ciudades" name="ciudades">
+                    </label>
+                    <datalist id="ciudades">
+                    </datalist>
+                    <button class="boton inputs-medidas" type="submit" onclick="filter()" >Filtrar Flats</button>
+                </div>
+            </div>
+            <div id="grid-flats">   
+            </div>
+        </div>
+    </section>
+<script src="/javascript/funciones_login.js"></script>
+<script src="/javascript/home.js"></script>
 </body>
 </html>
+
+
