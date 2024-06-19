@@ -17,6 +17,7 @@ const validarLogin = function () {
   if (autenticarUsuario(userObject) === 'Credenciales correctas') {
     usuarioEnSesion(user);
     document.location.href = 'Home.html';
+    alert("Bienvenido");
   } else {
     document.getElementById('username').classList.remove('inputs');
     document.getElementById('username').classList.add('inputs-vacio');
@@ -180,7 +181,6 @@ const autenticarUsuario = userLogin => {
 const usuarioEnSesion = useractual => {
   let usuarioLogged = useractual;
   localStorage.setItem('usuarioLogeado',useractual);
-  //localStorage.setItem('usuarioLogeado', JSON.stringify(usuarioLogged));
   console.log("usuario guardado en usuarioLogueado")
   return;
 };
@@ -395,7 +395,7 @@ function buscarNombre() {
 function cerrarSesion(){
             localStorage.removeItem('NombreLogueado');
             localStorage.removeItem('usuarioLogeado');
-           localStorage.removeItem('flatsFavoritos');
+         //  localStorage.removeItem('flatsFavoritos');
             document.location.href = 'Login.html';
             alert('**Cerrando Sesion**');   
 }

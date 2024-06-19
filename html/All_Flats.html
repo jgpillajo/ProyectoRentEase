@@ -12,7 +12,7 @@
 </head>
 
     <input type="text" id="usuario" hidden>
-<body onload="DefinirUsuario();">
+<body onload="DefinirUsuario();filtrarFlats()">
     <div class="header">
         <div>
             <img class="logo-s" src="/img/logo.svg" alt="">
@@ -56,7 +56,7 @@
 
 
 <div>
-    <table id="data-table" border="1">
+    <table id="tablaFlats" border="1">
         <thead>
             <tr>
                 <th>Ciudad</th>
@@ -64,8 +64,9 @@
                 <th>Numero de lote</th>
                 <th>Area de construcción</th>
                 <th>Aire Acondicionado</th>
+                <th>Anio construcción</th>
                 <th>Precio de arrendamiento</th>
-                <th>Fecha Disponibilidad de arrendamiento</th>
+                <th>Disponibilidad de arrendamiento</th>
                 <th>Favoritos</th>
                 
             </tr>
@@ -76,74 +77,69 @@
     </table>
 
     <script>      
-        // Definir la función para mostrar los datos en la tabla
-        var mostrarDatosEnTabla = function() {
+    
+        function filtrarFlats() {
+            const usuario = document.getElementById('usuario').value;
+            const flats = JSON.parse(localStorage.getItem('flats')) || [];
+            const flatsFiltrados = flats.filter(flat => flat.usuario === usuario);
+            mostrarTabla(flatsFiltrados);
+        }
 
-            // Obtener el usuario del campo de entrada
-            const usuarioBuscado = document.getElementById('usuario').value;
+        function mostrarTabla(flats) {
+            const tbody = document.getElementById('tablaFlats').getElementsByTagName('tbody')[0];
+            tbody.innerHTML = ''; // Limpiar la tabla
 
-            // Recuperar el array de localStorage y parsear el JSON
-            const datosJSON = localStorage.getItem('flats');
-            const datos = datosJSON ? JSON.parse(datosJSON) : [];
+            flats.forEach((flat, index) => {
+              
+                const row = tbody.insertRow();
+                row.insertCell(0).innerText = flat.city;
+                row.insertCell(1).innerText = flat.streetname;
+                row.insertCell(2).innerText = flat.streetnumber;
+                row.insertCell(3).innerText = flat.size;
+                row.insertCell(4).innerText = flat.ac;
+                row.insertCell(5).innerText = flat.year;
+                row.insertCell(6).innerText = flat.price;
+                row.insertCell(7).innerText = flat.date;
 
-            // Filtrar los datos por el usuario
-            const datosFiltrados = datos.filter(item => item.usuario === usuarioBuscado);
-
-            // Seleccionar el cuerpo de la tabla
-            const tbody = document.querySelector('#data-table tbody');
-
-            // Limpiar el contenido previo del tbody
-            tbody.innerHTML = '';
-
-            // Iterar sobre el array y generar filas de la tabla
-            datosFiltrados.forEach((item,index) => {
-                const fila = document.createElement('tr');
-                fila.innerHTML = `
-                    <td>${item.city}</td>
-                    <td>${item.streetname}</td>
-                    <td>${item.streetnumber}</td>
-                    <td>${item.size}</td>
-                    <td>${item.ac}</td>
-                    <td>${item.price}</td>
-                    <td>${item.date}</td>
-                    <td> <button onclick="marcarFavorito(${index})">✅</button> </td>
-                `;
-                tbody.appendChild(fila);
+                
+                const actionCell = row.insertCell(8);
+                const favButton = document.createElement('button');
+                favButton.innerText = '✅';
+                favButton.onclick = function() {
+                    marcarComoFavorito(flat);
+                };
+                actionCell.appendChild(favButton);
             });
-        };
+        }
+             // Función para marcar un flat como favorito y guardarlo en localStorage
+        
+             function marcarComoFavorito(flat) {
+            const flatsFavoritos = JSON.parse(localStorage.getItem('flatsFavoritos')) || [];
+            const isDuplicate = flatsFavoritos.some(fav => fav.usuario === flat.usuario 
+            && fav.city === flat.city
+            && fav.streetname === flat.streetname 
+            && fav.streetnumber === flat.streetnumber 
+            && fav.size === flat.size
+            && fav.ac === flat.ac 
+            && fav.year === flat.year 
+            && fav.price === flat.price
+            && fav.date === flat.date);
 
-        // Función para marcar un elemento como favorito
-            var marcarFavorito = function(index) {
-            // Recuperar el array de localStorage y parsear el JSON
-            const datosJSON = localStorage.getItem('flats');
-            const datos = datosJSON ? JSON.parse(datosJSON) : [];
-
-            // Obtener el item seleccionado
-            const itemFavorito = datos[index];
-
-            // Recuperar o inicializar el array de favoritos en localStorage
-            const favoritosJSON = localStorage.getItem('flatsFavoritos');
-            const favoritos = favoritosJSON ? JSON.parse(favoritosJSON) : [];
-
-            // Agregar el item seleccionado al array de favoritos si no está ya en él
-            if (!favoritos.some(fav => fav.city === itemFavorito.city 
-            && fav.streetname === itemFavorito.streetname 
-            && fav.size === itemFavorito.size
-            && fav.ac === itemFavorito.ac 
-            && fav.price === itemFavorito.price
-            && fav.date === itemFavorito.date)) {
-                favoritos.push(itemFavorito);
-                localStorage.setItem('flatsFavoritos', JSON.stringify(favoritos));
-                alert("**Bien seleccionado en favoritos**");
-            }else{
-                alert("**Ya ha sido seleccionado como favorito**");
+            if (!isDuplicate) {
+                flatsFavoritos.push(flat);
+                localStorage.setItem('flatsFavoritos', JSON.stringify(flatsFavoritos));
+                alert('**Bien marcado como favorito**');
+            } else {
+                alert('**Bien ya está marcado como favorito**');
             }
-        };
+        }
 
-        // Llamar a la función cuando el documento esté completamente cargado
-        document.addEventListener('DOMContentLoaded', (event) => {
-            mostrarDatosEnTabla();
-        });
+        // Cargar los flats en la tabla al cargar la página
+        window.onload = function() {
+            filtrarFlats();
+        };
+        
+
     </script>
 
 

@@ -29,7 +29,7 @@
         </div>
     </div>
 
-        <img class="img-fondo" src="/img/casa1.webp" alt="">
+        
 
     <div id="mensaje" hidden></div>
 
@@ -59,13 +59,14 @@
         <table border="1" id="tablaFlats">
             <thead>
                 <tr>
-                    <th>Ciudad</th>
-                    <th>Dirección</th>
-                    <th>Numero de lote</th>
-                    <th>Area construcción</th>
-                    <th>Aire Acondicionado</th>
-                    <th>Precio arrendamiento</th>
-                    <th>Fecha disponibilidad de arriendo</th>
+                <th>Ciudad</th>
+                <th>Direccion</th>
+                <th>Numero de lote</th>
+                <th>Area de construcción</th>
+                <th>Aire Acondicionado</th>
+                <th>Anio construcción</th>
+                <th>Precio de arrendamiento</th>
+                <th>Disponibilidad de arrendamiento</th>
                     <th>Favorito?</th>    
                     </tr>
             </thead>
@@ -76,54 +77,76 @@
 
 
         <script>
-            // Función para cargar los datos del localStorage y mostrarlos en la tabla
-            function cargarFavoritos() {
-                // Recuperar los datos de localStorage
-                const datosJSON = localStorage.getItem('flatsFavoritos');
-                const datos = datosJSON ? JSON.parse(datosJSON) : [];
-    
-                // Referencia a la tabla
-                const tabla = document.getElementById('tablaFlats').getElementsByTagName('tbody')[0];
-                tabla.innerHTML = ''; // Limpiar la tabla
-    
-                // Llenar la tabla con los datos
-                datos.forEach((dato, indice) => {
-                    const fila = tabla.insertRow();
-                    fila.insertCell(0).textContent = dato.city;
-                    fila.insertCell(1).textContent = dato.streetnumber;
-                    fila.insertCell(2).textContent = dato.streetname;
-                    fila.insertCell(3).textContent = dato.size;
-                    fila.insertCell(4).textContent = dato.ac;
-                    fila.insertCell(5).textContent = dato.price;
-                    fila.insertCell(6).textContent = dato.date;
+        
+        function filtrarFlats() {
+            const usuario = document.getElementById('usuario').value;
+            const flats = JSON.parse(localStorage.getItem('flatsFavoritos')) || [];
+            const flatsFiltrados = flats.filter(flat => flat.usuario === usuario);
+            mostrarTabla(flatsFiltrados);
+        }
 
-    
-                    // Crear botón de eliminar
-                    const botonEliminar = document.createElement('button');
-                    botonEliminar.textContent = '❌';
-                    botonEliminar.onclick = () => eliminarFavorito(indice);
-                    fila.insertCell(7).appendChild(botonEliminar);
-                });
-            }
-    
-            // Función para eliminar un elemento de favoritos y actualizar localStorage
-            function eliminarFavorito(indice) {
-                // Recuperar los datos de localStorage
-                const datosJSON = localStorage.getItem('flatsFavoritos');
-                const datos = datosJSON ? JSON.parse(datosJSON) : [];
-    
-                // Eliminar el elemento del array
-                datos.splice(indice, 1);
-    
-                // Guardar los datos actualizados en localStorage
-                localStorage.setItem('flatsFavoritos', JSON.stringify(datos));
-    
-                alert('**Bien eliminado de favoritos**');
-                cargarFavoritos(); // Recargar la tabla
-            }
-    
-            // Llamar a la función cargarDatos cuando la página se cargue
-            window.onload = cargarFavoritos;
+        // Función para mostrar la tabla con los flats filtrados
+        function mostrarTabla(flats) {
+            const tbody = document.getElementById('tablaFlats').getElementsByTagName('tbody')[0];
+            tbody.innerHTML = ''; // Limpiar la tabla
+
+            flats.forEach((flat, index) => {
+                const row = tbody.insertRow();
+                row.insertCell(0).innerText = flat.city;
+                row.insertCell(1).innerText = flat.streetname;
+                row.insertCell(2).innerText = flat.streetnumber;
+                row.insertCell(3).innerText = flat.size;
+                row.insertCell(4).innerText = flat.ac;
+                row.insertCell(5).innerText = flat.year;
+                row.insertCell(6).innerText = flat.price;
+                row.insertCell(7).innerText = flat.date;
+
+
+
+                // Botón para eliminar
+                const actionCell = row.insertCell(8);
+                const delButton = document.createElement('button');
+                delButton.innerText = '❌';
+                delButton.onclick = function() {
+                    eliminarFlat(flat);
+                };
+                actionCell.appendChild(delButton);
+            });
+        }
+
+        function eliminarFlat(flat) {
+            let flats = JSON.parse(localStorage.getItem('flatsFavoritos')) || [];
+            flats = flats.map(f => {
+                    if (f.usuario === flat.usuario
+                && f.city === flat.city
+                && f.streetname === flat.streetname
+                && f.streetnumber === flat.streetnumber
+                && f.size === flat.size
+                && f.ac === flat.ac
+                && f.year === flat.year 
+                && f.price === flat.price
+                && f.date === flat.date) {
+                    f.usuario = "undefined";
+                    f.city = "undefined";
+                    f.streetname = "undefined";
+                    f.streetnumber = "undefined";
+                    f.size = "undefined";
+                    f.ac = "undefined";
+                    f.year ="undefined";
+                    f.price= "undefined";
+                    f.date = "undefined"; // Cambiar el usuario 
+                    
+                }
+                return f;
+            });
+            localStorage.setItem('flatsFavoritos', JSON.stringify(flats));
+            console.log(flat);
+            alert('**Bien Eliminado de Favoritos**');
+            filtrarFlats(); // Volver a filtrar y actualizar la tabla
+        }
+        window.onload = function() {
+            filtrarFlats();
+        };
         </script>
 
 </body>
