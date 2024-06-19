@@ -45,8 +45,31 @@ const OrdenArea2 = flatStorage => {
   return flatStorage.sort((a, b) => b.area - a.area);
 };
 
+const removerTodosChildren = () => {
+  let remove = document.getElementById('grid-flats');
+  remove.replaceChildren();
+};
+
 const creadorFlats = ordenarBoton => {
+  if (ordenarBoton === false) {
+    removerTodosChildren();
+    let divGrid2 = document.getElementById('grid-flats');
+    let temp = document.createElement('div');
+    temp.classList.add('grid-flat-solo');
+    temp.innerHTML = `
+    <img class="img-flat" src="/img/no_img.jpg" alt="">
+    <div class = "contenedor-flat">
+    <p class="avenida-flat">No hay información disponible</p>
+    <p><span class = "precio">No hay infomración disponible </span> $/mes</p>
+    <p>No hay infomración disponible m², aire acondicionado No hay infomración disponible</p>
+    <p>Año de construción: No hay infomración disponible</p>
+    <p>Disponible desde: No hay infomración disponible</p>
+    </div>`;
+    divGrid2.appendChild(temp);
+    return;
+  }
   if (!ordenarBoton) {
+    removerTodosChildren();
     let divGrid2 = document.getElementById('grid-flats');
     for (let i = 0; i < flatStorage.length; i++) {
       let temp = document.createElement('div');
@@ -82,11 +105,6 @@ const creadorFlats = ordenarBoton => {
   }
 };
 creadorFlats();
-
-const removerTodosChildren = () => {
-  let remove = document.getElementById('grid-flats');
-  remove.replaceChildren();
-};
 
 const datalistCiudades = () => {
   let ciudades = [];
@@ -130,6 +148,12 @@ const filter = () => {
   let areaMin = document.getElementById('area-min').value;
   let areaMax = document.getElementById('area-max').value;
   let ciudades = document.getElementsByName('ciudades')[0].value;
+
+  if (precioMin <= 0 || precioMax <= 0 || areaMin <= 0 || areaMax <= 0) {
+    let noFlat = false;
+    creadorFlats(noFlat);
+    return;
+  }
 
   let primero = filtro1(precioMin, flatStorage);
   let segundo = filtro2(precioMax, primero);
