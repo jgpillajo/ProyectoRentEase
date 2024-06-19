@@ -17,6 +17,7 @@ const validarLogin = function () {
   if (autenticarUsuario(userObject) === 'Credenciales correctas') {
     usuarioEnSesion(user);
     document.location.href = 'Home.html';
+    alert("Bienvenido");
   } else {
     document.getElementById('username').classList.remove('inputs');
     document.getElementById('username').classList.add('inputs-vacio');
@@ -180,7 +181,6 @@ const autenticarUsuario = userLogin => {
 const usuarioEnSesion = useractual => {
   let usuarioLogged = useractual;
   localStorage.setItem('usuarioLogeado',useractual);
-  //localStorage.setItem('usuarioLogeado', JSON.stringify(usuarioLogged));
   console.log("usuario guardado en usuarioLogueado")
   return;
 };
@@ -292,9 +292,9 @@ const validarNewFLat = () => {
     'disponibilidad',
   ];
   let parrafos = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9'];
-  /*   if (!validarCamposVacios(idFlat, parrafos)) {
+     if (!validarCamposVacios(idFlat, parrafos)) {
     return;
-  } */
+  } 
   let provincia = document.getElementById('provincia').value;
   let ciudad = document.getElementById('ciudad').value;
   let direccion = document.getElementById('direccion').value;
@@ -390,4 +390,12 @@ function buscarNombre() {
   } else {
       document.getElementById('resultadoNombre').textContent = 'Usuario no encontrado';
   }
+}
+
+function cerrarSesion(){
+            localStorage.removeItem('NombreLogueado');
+            localStorage.removeItem('usuarioLogeado');
+         //  localStorage.removeItem('flatsFavoritos');
+            document.location.href = 'Login.html';
+            alert('**Cerrando Sesion**');   
 }
