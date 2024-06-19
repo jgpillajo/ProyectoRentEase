@@ -183,3 +183,46 @@ h1 {
 .form-2 {
   display: flex;
 }
+
+.subtitulos{
+  text-align: center;
+}
+
+/* Estilos generales para la tabla */
+        #tablaFlats {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+            
+        }
+
+        /* Estilo para las celdas de la tabla */
+        #tablaFlats th, #tablaFlats td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            
+        }
+
+        /* Estilo para la cabecera de la tabla */
+        #tablaFlats th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center; /* Centrar el texto */
+            background-color: #4CAF50; /* Verde */
+            color: white;
+        }
+
+        /* Estilo para las filas de la tabla */
+        #tablaFlats tr:nth-child(even) {
+            background-color: #f2f2f2;
+            
+        }
+
+        #tablaFlats tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Estilo para los datos de la tabla */
+        #tablaFlats td {
+          text-align: center; /* Centrar el texto */
+        }
