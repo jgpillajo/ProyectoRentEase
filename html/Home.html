@@ -28,126 +28,42 @@
             <a href="/html/Login.html" onclick="cerrarSesion()" class="fa fa-share-square" style='font-size:20px'>Cerrar Sesion</a>
         </div>
     </div>
+    </div>
 
-        
-
-    <div id="mensaje" hidden></div>
-
-
-    <script>
-        var DefinirUsuario = function() {
-            const usuario = localStorage.getItem('usuarioLogeado');
-            if (usuario) {
-                document.getElementById('mensaje').innerHTML = " " + usuario;
-                document.getElementById('resultadoNombre').innerHTML = " " + localStorage.getItem('NombreLogueado');
-                document.getElementById('usuario').value = usuario;
-
-
-            } else {
-               
-                alert("**No hay usuario Logueado**");
-                document.location.href = 'Login.html';
-            }
-        }
-        // Llamar a la función cuando el documento esté completamente cargado
-        document.addEventListener('DOMContentLoaded', (event) => {
-            DefinirUsuario();
-        });
-    </script>
-
-        <h2>Bienes Favoritos</h2>
-        <table border="1" id="tablaFlats">
-            <thead>
-                <tr>
-                <th>Ciudad</th>
-                <th>Direccion</th>
-                <th>Numero de lote</th>
-                <th>Area de construcción</th>
-                <th>Aire Acondicionado</th>
-                <th>Anio construcción</th>
-                <th>Precio de arrendamiento</th>
-                <th>Disponibilidad de arrendamiento</th>
-                    <th>Favorito?</th>    
-                    </tr>
-            </thead>
-            <tbody>
-                <!-- Los datos se llenarán dinámicamente -->
-            </tbody>
-        </table>
-
-
-        <script>
-        
-        function filtrarFlats() {
-            const usuario = document.getElementById('usuario').value;
-            const flats = JSON.parse(localStorage.getItem('flatsFavoritos')) || [];
-            const flatsFiltrados = flats.filter(flat => flat.usuario === usuario);
-            mostrarTabla(flatsFiltrados);
-        }
-
-        // Función para mostrar la tabla con los flats filtrados
-        function mostrarTabla(flats) {
-            const tbody = document.getElementById('tablaFlats').getElementsByTagName('tbody')[0];
-            tbody.innerHTML = ''; // Limpiar la tabla
-
-            flats.forEach((flat, index) => {
-                const row = tbody.insertRow();
-                row.insertCell(0).innerText = flat.city;
-                row.insertCell(1).innerText = flat.streetname;
-                row.insertCell(2).innerText = flat.streetnumber;
-                row.insertCell(3).innerText = flat.size;
-                row.insertCell(4).innerText = flat.ac;
-                row.insertCell(5).innerText = flat.year;
-                row.insertCell(6).innerText = flat.price;
-                row.insertCell(7).innerText = flat.date;
-
-
-
-                // Botón para eliminar
-                const actionCell = row.insertCell(8);
-                const delButton = document.createElement('button');
-                delButton.innerText = '❌';
-                delButton.onclick = function() {
-                    eliminarFlat(flat);
-                };
-                actionCell.appendChild(delButton);
-            });
-        }
-
-        function eliminarFlat(flat) {
-            let flats = JSON.parse(localStorage.getItem('flatsFavoritos')) || [];
-            flats = flats.map(f => {
-                    if (f.usuario === flat.usuario
-                && f.city === flat.city
-                && f.streetname === flat.streetname
-                && f.streetnumber === flat.streetnumber
-                && f.size === flat.size
-                && f.ac === flat.ac
-                && f.year === flat.year 
-                && f.price === flat.price
-                && f.date === flat.date) {
-                    f.usuario = "undefined";
-                    f.city = "undefined";
-                    f.streetname = "undefined";
-                    f.streetnumber = "undefined";
-                    f.size = "undefined";
-                    f.ac = "undefined";
-                    f.year ="undefined";
-                    f.price= "undefined";
-                    f.date = "undefined"; // Cambiar el usuario 
+        <img class="img-fondo" src="/img/casa1.webp" alt="">
+    </section>
+    <section>
+        <div class="nav-ordenar">
+            <p>Ordenar por: </p>
+            <input class="boton-ordenar" type="button" value="Ciudad" onclick="getvalue(this)">
+            <input class="boton-ordenar" type="button" value="Precio" onclick="getvalue(this)">
+            <input class="boton-ordenar" type="button" value="Área" onclick="getvalue(this)">
+        </div>
+        <div class="contenedor-filtros">
+            <div class="filtrar">
+                <div class="absolute">
+                    <label for="">Precio</label>
+                    <input id="precio-min" class="inputs inputs-medidas" type="number">
+                    <input id="precio-max" class="inputs inputs-medidas" type="number" placeholder="valor máximo - 100">
+                
+                    <label for="">Area</label>
+                    <input id="area-min" class="inputs inputs-medidas" type="number">
+                    <input id="area-max" class="inputs inputs-medidas" type="number">
                     
-                }
-                return f;
-            });
-            localStorage.setItem('flatsFavoritos', JSON.stringify(flats));
-            console.log(flat);
-            alert('**Bien Eliminado de Favoritos**');
-            filtrarFlats(); // Volver a filtrar y actualizar la tabla
-        }
-        window.onload = function() {
-            filtrarFlats();
-        };
-        </script>
-
+                    <label for="">Ciudad
+                        <input class="inputs inputs-medidas" list="ciudades" name="ciudades">
+                    </label>
+                    <datalist id="ciudades">
+                    </datalist>
+                    <button class="boton inputs-medidas" type="submit" onclick="filter()" >Filtrar Flats</button>
+                </div>
+            </div>
+            <div id="grid-flats">   
+            </div>
+        </div>
+    </section>
+<script src="/javascript/funciones_login.js"></script>
+<script src="/javascript/home.js"></script>
+<script src="/javascript/funcionesflat.js" type="text/javascript"></script>
 </body>
 </html>
