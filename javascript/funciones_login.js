@@ -17,7 +17,7 @@ const validarLogin = function () {
   if (autenticarUsuario(userObject) === 'Credenciales correctas') {
     usuarioEnSesion(user);
     document.location.href = 'Home.html';
-    alert("Bienvenido");
+    alert('Bienvenido');
   } else {
     document.getElementById('username').classList.remove('inputs');
     document.getElementById('username').classList.add('inputs-vacio');
@@ -31,8 +31,18 @@ const validarRegister = function () {
   let idRegister = ['nombre', 'apellido', 'fecha', 'correo', 'clave'];
   let parrafos2 = ['p1', 'p2', 'p3', 'p4', 'p5'];
 
-  if (!validarCamposVacios(idRegister, parrafos2)) {
+  /*   if (!validarCamposVacios(idRegister, parrafos2)) {
     return;
+  } */
+
+  if (validarEmail()) {
+    document.getElementById('correo').classList.add('inputs');
+    document.getElementById('correo').classList.remove('inputs-vacio');
+    document.getElementById('p6').classList.add('no-display');
+  } else {
+    document.getElementById('correo').classList.remove('inputs');
+    document.getElementById('correo').classList.add('inputs-vacio');
+    document.getElementById('p6').classList.remove('no-display');
   }
 
   let nombre = document.getElementById('nombre').value;
@@ -76,6 +86,16 @@ const validarRegister = function () {
     document.getElementById('correo').classList.add('inputs');
     document.getElementById('correo').classList.remove('inputs-vacio');
     document.getElementById('contenedor-correo').classList.add('no-display');
+  }
+};
+
+const validarEmail = () => {
+  let correoValue = document.getElementById('correo').value;
+  let verificador = correoValue.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+  if (verificador) {
+    return true;
+  } else {
+    return false;
   }
 };
 
@@ -124,7 +144,7 @@ const registrarUsuario = function (userRegister) {
 
 const claveValidacion = function () {
   let claveDigi = document.getElementById('clave').value;
-  let caracterSpecRegex = /([!@#$%^&*])/gm;
+  let caracterSpecRegex = /([!@#$%^&=<>*])/gm;
   let numeroRegex = /([0-9])/gm;
   let caracteres8 = document.querySelectorAll('span');
   let verificador = [];
@@ -169,10 +189,7 @@ const autenticarUsuario = userLogin => {
     return;
   }
   for (let i = 0; i < usuarioStorage.length; i++) {
-    if (
-      usuarioStorage[i].correo === userLogin.username &&
-      usuarioStorage[i].clave === userLogin.password
-    ) {
+    if (usuarioStorage[i].correo === userLogin.username && usuarioStorage[i].clave === userLogin.password) {
       return 'Credenciales correctas';
     }
   }
@@ -180,8 +197,8 @@ const autenticarUsuario = userLogin => {
 
 const usuarioEnSesion = useractual => {
   let usuarioLogged = useractual;
-  localStorage.setItem('usuarioLogeado',useractual);
-  console.log("usuario guardado en usuarioLogueado")
+  localStorage.setItem('usuarioLogeado', useractual);
+  console.log('usuario guardado en usuarioLogueado');
   return;
 };
 
@@ -191,10 +208,7 @@ const sesionActual = () => {
   const validarSesionActual = () => {
     document.location.href = 'Login.html';
   };
-  if (
-    !JSON.parse(localStorage.getItem('usuarioLogueado')) ||
-    JSON.parse(localStorage.getItem('usuarioLogueado')) === ''
-  ) {
+  if (!JSON.parse(localStorage.getItem('usuarioLogueado')) || JSON.parse(localStorage.getItem('usuarioLogueado')) === '') {
     alert('Inicia sesión para poder ver la página');
     setTimeout(validarSesionActual, 1300);
   } else {
@@ -204,59 +218,9 @@ const sesionActual = () => {
 
 //! Provincias Ec
 
-let provincias = [
-  'Azuay',
-  'Bolívar',
-  'Cañar',
-  'Carchi',
-  'Chimborazo',
-  'Cotopaxi',
-  'El Oro',
-  'Esmeraldas',
-  'Galápagos',
-  'Guayas',
-  'Imbabura',
-  'Loja',
-  'Los Ríos',
-  'Manabí',
-  'Morona-Santiago',
-  'Napo',
-  'Orellana',
-  'Pastaza',
-  'Pichincha',
-  'Santa Elena',
-  'Santo Domingo de los Tsáchilas',
-  'Sucumbíos',
-  'Tungurahua',
-  'Zamora-Chinchipe',
-];
+let provincias = ['Azuay', 'Bolívar', 'Cañar', 'Carchi', 'Chimborazo', 'Cotopaxi', 'El Oro', 'Esmeraldas', 'Galápagos', 'Guayas', 'Imbabura', 'Loja', 'Los Ríos', 'Manabí', 'Morona-Santiago', 'Napo', 'Orellana', 'Pastaza', 'Pichincha', 'Santa Elena', 'Santo Domingo de los Tsáchilas', 'Sucumbíos', 'Tungurahua', 'Zamora-Chinchipe'];
 
-let provinciasValue = [
-  'Azuay',
-  'Bolivar',
-  'Canar',
-  'Carchi',
-  'Chimborazo',
-  'Cotopaxi',
-  'El Oro',
-  'Esmeraldas',
-  'Galapagos',
-  'Guayas',
-  'Imbabura',
-  'Loja',
-  'Los Rios',
-  'Manabi',
-  'Morona-Santiago',
-  'Napo',
-  'Orellana',
-  'Pastaza',
-  'Pichincha',
-  'Santa Elena',
-  'Santo Domingo de los Tsachilas',
-  'Sucumbios',
-  'Tungurahua',
-  'Zamora-Chinchipe',
-];
+let provinciasValue = ['Azuay', 'Bolivar', 'Canar', 'Carchi', 'Chimborazo', 'Cotopaxi', 'El Oro', 'Esmeraldas', 'Galapagos', 'Guayas', 'Imbabura', 'Loja', 'Los Rios', 'Manabi', 'Morona-Santiago', 'Napo', 'Orellana', 'Pastaza', 'Pichincha', 'Santa Elena', 'Santo Domingo de los Tsachilas', 'Sucumbios', 'Tungurahua', 'Zamora-Chinchipe'];
 
 let idProvincias = document.getElementById('provincia');
 
@@ -265,7 +229,7 @@ for (let [index, value] of provincias.entries()) {
   option.value = `${provinciasValue[index]}`;
   let provinciaText = `${value} `;
   option.innerHTML = provinciaText;
- // idProvincias.appendChild(option);
+  // idProvincias.appendChild(option);
 }
 
 //! New Flat
@@ -280,21 +244,11 @@ const registratNewFlat = newFlat => {
 };
 
 const validarNewFLat = () => {
-  let idFlat = [
-    'provincia',
-    'ciudad',
-    'direccion',
-    'numeracion',
-    'area',
-    'aire',
-    'construccion',
-    'precio',
-    'disponibilidad',
-  ];
+  let idFlat = ['provincia', 'ciudad', 'direccion', 'numeracion', 'area', 'aire', 'construccion', 'precio', 'disponibilidad'];
   let parrafos = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9'];
-     if (!validarCamposVacios(idFlat, parrafos)) {
+  if (!validarCamposVacios(idFlat, parrafos)) {
     return;
-  } 
+  }
   let provincia = document.getElementById('provincia').value;
   let ciudad = document.getElementById('ciudad').value;
   let direccion = document.getElementById('direccion').value;
@@ -321,31 +275,25 @@ const validarNewFLat = () => {
 };
 
 function ValidarSoloLetras() {
-   
-  const nombre = document.getElementById("nombre").value;
-  const apellido = document.getElementById("apellido").value;
+  const nombre = document.getElementById('nombre').value;
+  const apellido = document.getElementById('apellido').value;
 
   const patronLetra = /^[A-Za-z\s]+$/;
-  
+
   const tieneFormatoNombre = patronLetra.test(nombre);
   const tieneFormatoApellido = patronLetra.test(apellido);
 
-   
-
   if (tieneFormatoNombre && tieneFormatoApellido) {
-    
-      return true;
-   } else {
-    
-      return false;
+    return true;
+  } else {
+    return false;
   }
-  }
-
+}
 
 function ValidarPassword() {
   // Obtener el valor de la contraseña desde el campo de entrada
-  const password = document.getElementById("clave").value;
-  
+  const password = document.getElementById('clave').value;
+
   // Definir los caracteres especiales, números, letras mayúsculas y letras minúsculas
   const patronCaracterEspecial = /[!"#$%&'()*+,-./:;<=>?@_`{|}~]/;
   const patronNumeros = /\d/;
@@ -354,21 +302,17 @@ function ValidarPassword() {
 
   // Verificar si la contraseña contiene al menos un carácter especial, un número, una letra mayúscula y una letra minúscula
   const tieneCaracterEspecial = patronCaracterEspecial.test(password);
-  const tieneNumero = patronNumeros .test(password);
-  const tieneMayus= patroMayus.test(password);
+  const tieneNumero = patronNumeros.test(password);
+  const tieneMayus = patroMayus.test(password);
   const tieneMinus = patronMinus.test(password);
 
   if (tieneCaracterEspecial && tieneNumero && tieneMayus && tieneMinus) {
-    alert("**Password Seguro**");
-      return true;
-  } 
-  else {
-    
-      return false;
-
+    alert('**Password Seguro**');
+    return true;
+  } else {
+    return false;
   }
 }
-
 
 function buscarNombre() {
   // Obtener el correo del campo de entrada
@@ -384,18 +328,17 @@ function buscarNombre() {
   // Mostrar el nombre del usuario si se encuentra
   if (usuarioEncontrado) {
     const nombre = usuarioEncontrado.nombre;
-      document.getElementById('resultadoNombre').textContent = `Nombre: ${usuarioEncontrado.nombre}`;
-      localStorage.setItem('NombreLogueado',nombre);
-
+    document.getElementById('resultadoNombre').textContent = `Nombre: ${usuarioEncontrado.nombre}`;
+    localStorage.setItem('NombreLogueado', nombre);
   } else {
-      document.getElementById('resultadoNombre').textContent = 'Usuario no encontrado';
+    document.getElementById('resultadoNombre').textContent = 'Usuario no encontrado';
   }
 }
 
-function cerrarSesion(){
-            localStorage.removeItem('NombreLogueado');
-            localStorage.removeItem('usuarioLogeado');
-         //  localStorage.removeItem('flatsFavoritos');
-            document.location.href = 'Login.html';
-            alert('**Cerrando Sesion**');   
+function cerrarSesion() {
+  localStorage.removeItem('NombreLogueado');
+  localStorage.removeItem('usuarioLogeado');
+  //  localStorage.removeItem('flatsFavoritos');
+  document.location.href = 'Login.html';
+  alert('**Cerrando Sesion**');
 }
