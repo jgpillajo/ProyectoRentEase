@@ -1,49 +1,4 @@
-let flatStorage = [
-  {
-    provincia: "Pichincha",
-    ciudad: "Zapotillo",
-    calle: "Eloy alfaro",
-    numeracion: "n34-118",
-    area: 125,
-    aire: true,
-    construcion: 1994,
-    precio: 1200,
-    disponibilidad: "2023/8/12",
-  },
-  {
-    provincia: "Pichincha",
-    ciudad: "Azcabulli",
-    calle: "Eloy alfaro2",
-    numeracion: "n34-118",
-    area: 88,
-    aire: false,
-    construcion: 1996,
-    precio: 450,
-    disponibilidad: "2023/8/12",
-  },
-  {
-    provincia: "Pichincha",
-    ciudad: "Farraon",
-    calle: "Eloy alfaro3",
-    numeracion: "n34-118",
-    area: 69,
-    aire: true,
-    construcion: 1998,
-    precio: 400,
-    disponibilidad: "2023/8/12",
-  },
-  {
-    provincia: "Pichincha",
-    ciudad: "Quito",
-    calle: "Eloy alfaro4",
-    numeracion: "n34-118",
-    area: 78,
-    aire: false,
-    construcion: 2000,
-    precio: 500,
-    disponibilidad: "2023/8/12",
-  },
-];
+let flatStorage = JSON.parse(localStorage.getItem("flats"));
 
 const pushImg = () => {
   for (let i = 0; i < flatStorage.length; i++) {
@@ -55,34 +10,32 @@ pushImg();
 
 getvalue = (t) => {
   if (t.value === "Ciudad") {
-    console.log("getvalue ciudad");
     creadorFlats(OrdenCiudad(flatStorage));
   } else if (t.value === "Precio") {
-    console.log("getvalue precio");
     creadorFlats(OrdenPrecio(flatStorage));
   } else if (t.value === "Área") {
-    console.log("getvalue area");
     creadorFlats(OrdenArea(flatStorage));
   }
 };
 
-const OrdenCiudad = (flatStorage) => {
-  return flatStorage.sort((a, b) => a.ciudad.localeCompare(b.ciudad));
+const OrdenCiudad = (arrayFlats) => {
+  return arrayFlats.sort((a, b) => a.city.localeCompare(b.city));
 };
-const OrdenPrecio = (flatStorage) => {
-  return flatStorage.sort((a, b) => a.precio - b.precio);
-};
-
-const OrdenArea = (flatStorage) => {
-  return flatStorage.sort((a, b) => a.area - b.area);
+const OrdenPrecio = (arrayFlats) => {
+  let temp = arrayFlats.sort((a, b) => Number(a.price) - Number(b.price));
+  return temp;
 };
 
-const ordenPrecio2 = (flatStorage) => {
-  return flatStorage.sort((a, b) => b.precio - a.precio);
+const OrdenArea = (arrayFlats) => {
+  return arrayFlats.sort((a, b) => Number(a.size) - Number(b.size));
 };
 
-const OrdenArea2 = (flatStorage) => {
-  return flatStorage.sort((a, b) => b.area - a.area);
+const ordenPrecio2 = (arrayFlats) => {
+  return arrayFlats.sort((a, b) => b.price - a.price);
+};
+
+const OrdenArea2 = (arrayFlats) => {
+  return arrayFlats.sort((a, b) => b.size - a.size);
 };
 
 const removerTodosChildren = () => {
@@ -91,7 +44,7 @@ const removerTodosChildren = () => {
 };
 
 const creadorFlats = (ordenarBoton) => {
-  if (ordenarBoton === false) {
+  if (ordenarBoton === false || ordenarBoton == "") {
     removerTodosChildren();
     let divGrid2 = document.getElementById("grid-flats");
     let temp = document.createElement("div");
@@ -117,11 +70,11 @@ const creadorFlats = (ordenarBoton) => {
       temp.innerHTML = `
       <img class="img-flat" src="/img/flat${flatStorage[i].img}.webp" alt="">
       <div class = "contenedor-flat">
-      <p class="avenida-flat">Av. ${flatStorage[i].calle} ${flatStorage[i].numeracion} ${flatStorage[i].provincia}, ${flatStorage[i].ciudad} </p>
-      <p><span class = "precio">${flatStorage[i].precio}</span> $/mes</p>
-      <p>${flatStorage[i].area} m², aire acondicionado ${flatStorage[i].aire}</p>
-      <p>Año de construción: ${flatStorage[i].construcion}</p>
-      <p>Disponible desde: ${flatStorage[i].disponibilidad}</p>
+      <p class="avenida-flat">Av. ${flatStorage[i].streetname} ${flatStorage[i].streetnumber}, ${flatStorage[i].city} </p>
+      <p><span class = "precio">${flatStorage[i].price}</span> $/mes</p>
+      <p>${flatStorage[i].size} m², aire acondicionado ${flatStorage[i].ac}</p>
+      <p>Año de construción: ${flatStorage[i].year}</p>
+      <p>Disponible desde: ${flatStorage[i].date}</p>
       </div>`;
       divGrid2.appendChild(temp);
     }
@@ -135,11 +88,11 @@ const creadorFlats = (ordenarBoton) => {
     temp.innerHTML = `
       <img class="img-flat" src="/img/flat${ordenarBoton[i].img}.webp" alt="">
       <div class = "contenedor-flat">
-      <p class="avenida-flat">Av. ${ordenarBoton[i].calle} ${ordenarBoton[i].numeracion} ${ordenarBoton[i].provincia}, ${ordenarBoton[i].ciudad} </p>
-      <p><span class = "precio">${ordenarBoton[i].precio}</span> $/mes</p>
-      <p>${ordenarBoton[i].area} m², aire acondicionado ${ordenarBoton[i].aire}</p>
-      <p>Año de construción: ${ordenarBoton[i].construcion}</p>
-      <p>Disponible desde: ${ordenarBoton[i].disponibilidad}</p>
+      <p class="avenida-flat">Av. ${ordenarBoton[i].streetname} ${ordenarBoton[i].streetnumber}, ${ordenarBoton[i].city} </p>
+      <p><span class = "precio">${ordenarBoton[i].price}</span> $/mes</p>
+      <p>${ordenarBoton[i].size} m², aire acondicionado ${ordenarBoton[i].ac}</p>
+      <p>Año de construción: ${ordenarBoton[i].year}</p>
+      <p>Disponible desde: ${ordenarBoton[i].date}</p>
       </div>`;
     divGrid.appendChild(temp);
   }
@@ -150,7 +103,7 @@ const datalistCiudades = () => {
   let ciudades = [];
   let flatOrdenados = OrdenCiudad(flatStorage);
   for (let [index, value] of flatOrdenados.entries()) {
-    ciudades.push(`${value.ciudad}`);
+    ciudades.push(`${value.city}`);
   }
   let ciudad = document.getElementById("ciudades");
   for (let [index, value] of ciudades.entries()) {
@@ -166,9 +119,9 @@ const precioHolder = () => {
   let preciMin = document.getElementById("precio-min");
   let preciMax = document.getElementById("precio-max");
   let temp = OrdenPrecio(flatStorage);
-  preciMin.placeholder = `Valor mínimo - ${temp[0].precio}`;
+  preciMin.placeholder = `Valor mínimo - ${temp[0].price}`;
   temp = ordenPrecio2(flatStorage);
-  preciMax.placeholder = `Valor máximo - ${temp[0].precio}`;
+  preciMax.placeholder = `Valor máximo - ${temp[0].price}`;
 };
 precioHolder();
 
@@ -176,9 +129,9 @@ const areaHolder = () => {
   let preciMin = document.getElementById("area-min");
   let preciMax = document.getElementById("area-max");
   let temp = OrdenArea(flatStorage);
-  preciMin.placeholder = `Valor mínimo - ${temp[0].area}`;
+  preciMin.placeholder = `Valor mínimo - ${temp[0].size}`;
   temp = OrdenArea2(flatStorage);
-  preciMax.placeholder = `Valor máximo - ${temp[0].area}`;
+  preciMax.placeholder = `Valor máximo - ${temp[0].size}`;
 };
 areaHolder();
 
@@ -192,6 +145,7 @@ const filter = () => {
   if (precioMin <= 0 && precioMax <= 0 && areaMin <= 0 && areaMax <= 0) {
     let noFlat = false;
     creadorFlats(noFlat);
+    console.log("precio minimo");
     return;
   }
 
@@ -206,7 +160,7 @@ const filter = () => {
 
 const filtro1 = (value, array) => {
   if (value !== "") {
-    let filtro = array.filter((e) => e.precio >= value);
+    let filtro = array.filter((e) => Number(e.price) >= value);
     return filtro;
   } else {
     return array;
@@ -215,7 +169,7 @@ const filtro1 = (value, array) => {
 
 const filtro2 = (value, array) => {
   if (value !== "") {
-    let filtro = array.filter((e) => e.precio <= value);
+    let filtro = array.filter((e) => Number(e.price) <= value);
     return filtro;
   } else {
     return array;
@@ -223,7 +177,7 @@ const filtro2 = (value, array) => {
 };
 const filtro3 = (value, array) => {
   if (value !== "") {
-    let filtro = array.filter((e) => e.area >= value);
+    let filtro = array.filter((e) => Number(e.size) >= value);
     return filtro;
   } else {
     return array;
@@ -231,7 +185,7 @@ const filtro3 = (value, array) => {
 };
 const filtro4 = (value, array) => {
   if (value !== "") {
-    let filtro = array.filter((e) => e.area <= value);
+    let filtro = array.filter((e) => Number(e.size) <= value);
     return filtro;
   } else {
     return array;
@@ -239,7 +193,7 @@ const filtro4 = (value, array) => {
 };
 const filtro5 = (value, array) => {
   if (value !== "") {
-    let filtro = array.filter((e) => e.ciudad == value);
+    let filtro = array.filter((e) => e.city === value);
     return filtro;
   } else {
     return array;

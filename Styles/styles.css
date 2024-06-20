@@ -222,6 +222,7 @@ section {
   margin-top: 10px;
   margin-bottom: 10px;
   height: min-content;
+  width: 725px;
 }
 
 .grid-flat-solo:hover {

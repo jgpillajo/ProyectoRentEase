@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+    <title>Home</title>
     <link rel="stylesheet" href="/Styles/styles.css">
 </head>
 
-<input type="text" id="usuario" hidden>
-<body onload="DefinirUsuario();">
-
-
+<input type="text" id="usuario" hidden >
+<!-- onload="DefinirUsuario()" -->
+<body >
     <div class="header">
         <div>
             <img class="logo-s" src="/img/logo.svg" alt="">
@@ -24,7 +23,8 @@
             <a href="/html/Login.html" onclick="cerrarSesion()" class="fa fa-share-square" style='font-size:20px'>Cerrar Sesion</a>
         </div>
     </div>
-    </div>
+    <div id="mensaje" hidden></div>
+
 
     <img class="img-fondo" src="/img/casa1.webp" alt="">
     </section>
@@ -40,8 +40,8 @@
                 <div class="absolute">
                     <label for="">Precio</label>
                     <input id="precio-min" class="inputs inputs-medidas" type="number">
-                    <input id="precio-max" class="inputs inputs-medidas" type="number" placeholder="valor máximo - 100">
-                
+                    <input id="precio-max" class="inputs inputs-medidas" type="number">
+                    
                     <label for="">Area</label>
                     <input id="area-min" class="inputs inputs-medidas" type="number">
                     <input id="area-max" class="inputs inputs-medidas" type="number">
@@ -58,9 +58,9 @@
             </div>
         </div>
     </section>
-<script src="/javascript/funciones_login.js"></script>
-<script src="/javascript/home.js"></script>
-<script src="/javascript/funcionesflat.js" type="text/javascript"></script>
-<script src="/javascript/funciones_Generales.js"></script>
+    <script src="/javascript/home.js"></script>
+    <script src="/javascript/funciones_login.js" type="text/javascript"></script>
+    <script src="/javascript/funcionesflat.js" type="text/javascript"></script>
+    <script src="/javascript/funciones_Generales.js" type="text/javascript"></script>
 </body>
 </html>
