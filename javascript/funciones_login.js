@@ -106,7 +106,8 @@ const validarCamposVacios = function (ids, parraf) {
 const registrarUsuario = function (userRegister) {
   let usuariosArray = [];
   let usuarioStorage = JSON.parse(localStorage.getItem('usuariosGuardados'));
-  if (!usuarioStorage && ValidarEmail()=== true) {
+  if (!usuarioStorage) {
+    console.log("emailcorrecto");
     usuariosArray.push(userRegister);
     localStorage.setItem('usuariosGuardados', JSON.stringify(usuariosArray));
     return 'Registro exitoso';
@@ -315,7 +316,7 @@ function ValidarPassword() {
   }
 }
 function ValidarEmail() {
-  const correo = document.getElementById("Correo").value;
+  const correo = document.getElementById("correo").value;
   const patronCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const tieneFormatoCorreo = patronCorreo.test(correo);
 
