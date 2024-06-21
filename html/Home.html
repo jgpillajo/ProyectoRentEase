@@ -7,10 +7,9 @@
     <link rel="stylesheet" href="/Styles/styles.css">
 </head>
 
-<input type="text" id="usuario" hidden >
-<!-- onload="DefinirUsuario()" -->
-<body >
-    <div class="header">
+        <input type="text" id="usuario" hidden >
+        <body onload="DefinirUsuario()">
+        <div class="header">
         <div>
             <img class="logo-s" src="/img/logo.svg" alt="">
         </div>
@@ -22,15 +21,13 @@
             <a href="./Profile_Update.html" >Editar Perfil</a>
             <a href="/html/Login.html" onclick="cerrarSesion()">Cerrar Sesion</a>
         </div>
-    </div>
-    <div id="mensaje" hidden></div>
+        </div>
+        <div id="mensaje" hidden></div>
 
-    <div class="imagen-fondo">    
+
         <img class="img-fondo" src="/img/casa1.webp" alt="">
-    </div>
-
-    </section>
-    <section>
+        
+    <section class="seccion-flat">
         <div class="nav-ordenar">
             <p>Ordenar por: </p>
             <input class="boton-ordenar" type="button" value="Ciudad" onclick="getvalue(this)">
@@ -41,19 +38,19 @@
             <div class="filtrar">
                 <div class="absolute">
                     <label for="">Precio</label>
-                    <input id="precio-min" class="input-home" type="number">
-                    <input id="precio-max" class="input-home" type="number">
+                    <input id="precio-min" class="inputs inputs-medidas" type="number">
+                    <input id="precio-max" class="inputs inputs-medidas" type="number">
                     
                     <label for="">Area</label>
-                    <input id="area-min" class="input-home" type="number">
-                    <input id="area-max" class="input-home" type="number">
+                    <input id="area-min" class="inputs inputs-medidas" type="number">
+                    <input id="area-max" class="inputs inputs-medidas" type="number">
                     
-                    <label for="">Ciudad</label>
-                        <input class="input-home" list="ciudades" name="ciudades">
-
+                    <label for="">Ciudad
+                        <input class="inputs inputs-medidas" list="ciudades" name="ciudades">
+                    </label>
                     <datalist id="ciudades">
                     </datalist>
-                    <button class="boton-home" type="submit" onclick="filter()" >Filtrar Flats</button>
+                    <button class="boton inputs-medidas" type="submit" onclick="filter()" >Filtrar Flats</button>
                 </div>
             </div>
             <div id="grid-flats">   
