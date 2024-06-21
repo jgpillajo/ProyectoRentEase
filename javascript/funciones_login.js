@@ -31,9 +31,9 @@ const validarRegister = function () {
   let idRegister = ['nombre', 'apellido', 'fecha', 'correo', 'clave'];
   let parrafos2 = ['p1', 'p2', 'p3', 'p4', 'p5'];
 
-  /*   if (!validarCamposVacios(idRegister, parrafos2)) {
+  if (!validarCamposVacios(idRegister, parrafos2)) {
     return;
-  } */
+  }
 
   if (validarEmail()) {
     document.getElementById('correo').classList.add('inputs');

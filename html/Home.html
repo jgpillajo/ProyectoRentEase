@@ -8,7 +8,8 @@
 </head>
 
 <input type="text" id="usuario" hidden >
-<body onload="DefinirUsuario()">
+<!-- onload="DefinirUsuario()" -->
+<body >
     <div class="header">
         <div>
             <img class="logo-s" src="/img/logo.svg" alt="">
@@ -24,8 +25,10 @@
     </div>
     <div id="mensaje" hidden></div>
 
+    <div class="imagen-fondo">    
+        <img class="img-fondo" src="/img/casa1.webp" alt="">
+    </div>
 
-    <img class="img-fondo" src="/img/casa1.webp" alt="">
     </section>
     <section>
         <div class="nav-ordenar">
@@ -38,19 +41,19 @@
             <div class="filtrar">
                 <div class="absolute">
                     <label for="">Precio</label>
-                    <input id="precio-min" class="inputs inputs-medidas" type="number">
-                    <input id="precio-max" class="inputs inputs-medidas" type="number">
+                    <input id="precio-min" class="input-home" type="number">
+                    <input id="precio-max" class="input-home" type="number">
                     
                     <label for="">Area</label>
-                    <input id="area-min" class="inputs inputs-medidas" type="number">
-                    <input id="area-max" class="inputs inputs-medidas" type="number">
+                    <input id="area-min" class="input-home" type="number">
+                    <input id="area-max" class="input-home" type="number">
                     
-                    <label for="">Ciudad
-                        <input class="inputs inputs-medidas" list="ciudades" name="ciudades">
-                    </label>
+                    <label for="">Ciudad</label>
+                        <input class="input-home" list="ciudades" name="ciudades">
+
                     <datalist id="ciudades">
                     </datalist>
-                    <button class="boton inputs-medidas" type="submit" onclick="filter()" >Filtrar Flats</button>
+                    <button class="boton-home" type="submit" onclick="filter()" >Filtrar Flats</button>
                 </div>
             </div>
             <div id="grid-flats">   
