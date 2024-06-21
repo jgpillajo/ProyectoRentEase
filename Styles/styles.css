@@ -406,6 +406,7 @@ section {
   }
   .input-home {
     width: 100px;
+    font-size: 10px;
   }
   .boton-home {
     color: white;
@@ -437,9 +438,26 @@ section {
   .nav {
     font-size: 12px;
   }
+  .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .nav a {
+    padding: 5px 25px 2px 25px;
+  }
   .imagen-fondo {
-    margin: 0 auto;
+    margin-top: 3px;
     align-content: center;
+    display: flex;
+
+    align-items: center;
+  }
+  .img-fondo {
+    width: 100%;
+  }
+  .contenedor-filtros {
+    margin: 2px;
   }
 }
 
@@ -461,6 +479,10 @@ section {
 
   .color-gris {
     font-size: 22px;
+  }
+
+  .imagen-fondo {
+    width: 250px;
   }
 }
 @media (769px<= width <= 1200px) {
