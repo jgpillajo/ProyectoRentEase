@@ -151,13 +151,14 @@ h1 {
 
 .nav a,
 .nav button {
+  font-family: "Homer Simpson UI";
   text-decoration: none;
   margin: 0 5px;
   padding: 10px;
   color: black;
   background: white;
   border: none;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .nav a:hover,
