@@ -17,7 +17,7 @@ const validarLogin = function () {
   if (autenticarUsuario(userObject) === 'Credenciales correctas') {
     usuarioEnSesion(user);
     document.location.href = 'Home.html';
-    alert('Bienvenido');
+    alert('**Bienvenido**');
   } else {
     document.getElementById('username').classList.remove('inputs');
     document.getElementById('username').classList.add('inputs-vacio');
