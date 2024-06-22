@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Bienes</title>
+    <link rel="stylesheet" href="/Styles/styles.css">
+    <link rel="stylesheet" href="/Styles/styles_table.css">
+    <script src="/javascript/funciones_login.js" type="text/javascript"></script>
+    <script src="/javascript/funcionesflat.js" type="text/javascript"></script>
+    <script src="/javascript/funciones_Generales.js"></script>
+</head>
+
+    <input type="text" id="usuario" hidden>
+<body onload="DefinirUsuario();filtrarFlats()">
+    <div class="header">
+        <div>
+            <img class="logo-s" src="/img/logo.svg" alt="">
+        </div>
+        <div class="nav">
+            <a id="resultadoNombre"></a>
+            <a href="./Home.html" >Inicio</a>
+            <a href="./All_Flats.html" >Mis Bienes</a>
+            <a href="./New_Flats.html" >Registrar Nuevo Bien</a>
+            <a href="./Profile_Update.html" >Editar Perfil</a>
+            <a href="/html/Login.html" onclick="cerrarSesion()">Cerrar Sesion</a>
+        </div>
+    </div>
+
+
+    <div id="mensaje" hidden></div>
+    
+
+    <h2 class="subtitulos">Mis Bienes</h2>
+
+
+    <div class="table_contenedor">
+    <table id="tablaFlats" border="1">
+        <thead>
+            <tr>
+                <th>Ciudad</th>
+                <th>Direccion</th>
+                <th>Numero de lote</th>
+                <th>Area de construcción</th>
+                <th>Aire Acondicionado</th>
+                <th>Año construcción</th>
+                <th>Precio de arrendamiento</th>
+                <th>Disponibilidad de arrendamiento</th>
+                <th>Favoritos</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las filas de datos se insertarán aquí dinámicamente -->
+        </tbody>
+        </div>
+    </table>
+
+    <script>      
+    
+        function filtrarFlats() {
+            const usuario = document.getElementById('usuario').value;
+            const flats = JSON.parse(localStorage.getItem('flats')) || [];
+            const flatsFiltrados = flats.filter(flat => flat.usuario === usuario);
+            mostrarTabla(flatsFiltrados);
+        }
+
+        function mostrarTabla(flats) {
+            const tbody = document.getElementById('tablaFlats').getElementsByTagName('tbody')[0];
+            tbody.innerHTML = ''; // Limpiar la tabla
+
+            flats.forEach((flat, index) => {
+              
+                const row = tbody.insertRow();
+                row.insertCell(0).innerText = flat.city;
+                row.insertCell(1).innerText = flat.streetname;
+                row.insertCell(2).innerText = flat.streetnumber;
+                row.insertCell(3).innerText = flat.size;
+                row.insertCell(4).innerText = flat.ac;
+                row.insertCell(5).innerText = flat.year;
+                row.insertCell(6).innerText = flat.price;
+                row.insertCell(7).innerText = flat.date;
+
+                
+                const actionCell = row.insertCell(8);
+                const favButton = document.createElement('button');
+                favButton.innerText = '⭐';
+                favButton.onclick = function() {
+                    marcarComoFavorito(flat);
+                };
+                actionCell.appendChild(favButton);
+            });
+        }
+             // Función para marcar un flat como favorito y guardarlo en localStorage
+        
+             function marcarComoFavorito(flat) {
+            const flatsFavoritos = JSON.parse(localStorage.getItem('flatsFavoritos')) || [];
+            const isDuplicate = flatsFavoritos.some(fav => fav.usuario === flat.usuario 
+            && fav.city === flat.city
+            && fav.streetname === flat.streetname 
+            && fav.streetnumber === flat.streetnumber 
+            && fav.size === flat.size
+            && fav.ac === flat.ac 
+            && fav.year === flat.year 
+            && fav.price === flat.price
+            && fav.date === flat.date);
+
+            if (!isDuplicate) {
+                flatsFavoritos.push(flat);
+                localStorage.setItem('flatsFavoritos', JSON.stringify(flatsFavoritos));
+                alert('**Bien marcado como favorito**');
+            } else {
+                alert('**Bien ya está marcado como favorito**');
+            }
+        }
+
+        // Cargar los flats en la tabla al cargar la página
+        window.onload = function() {
+            filtrarFlats();
+        };
+        
+
+    </script>
+
+
+</div>
+
+
+</body>
+<footer id="derechos">
+    <div class="contenedor">
+        <p> Derechos Reservados RentEase - 2024</p><br>
+    </div>
+</footer>
+</html>

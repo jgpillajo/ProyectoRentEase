@@ -1,0 +1,158 @@
+
+.table_contenedor {
+    background-image: url('/img/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* Contenedor principal para centrar la tabla horizontalmente */
+ .subtitulos{
+    text-align: center;
+ }
+.table_contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background-color: #f2f3ee;
+}
+
+/* Estilo general para la tabla */
+#tablaFlats {
+    width: 100%;
+    max-width: 1400px; 
+    border-collapse: collapse;
+    background-color: #f9f9f9; 
+    text-align: center; 
+}
+
+/* Estilo para las cabeceras de la tabla */
+#tablaFlats th {
+    background-color: #daef7a;
+    color:  #060305; /* Texto blanco */
+    padding: 10px;
+    text-align: left; 
+}
+
+/* Estilo para las filas de la tabla */
+#tablaFlats td {
+    padding: 10px;
+    border: 1px solid #dc0290; 
+}
+
+/* Estilo para las filas pares */
+#tablaFlats tr:nth-child(even) {
+    background-color: #fafcdd; 
+}
+
+/* Estilo para las filas impares */
+#tablaFlats tr:nth-child(odd) {
+    background-color: #ffffff; 
+}
+
+
+/* Estilo para hacer la tabla responsiva */
+@media (max-width: 768px) {
+    #tablaFlats thead {
+        display: none; 
+    }
+
+    #tablaFlats tr {
+        display: block;
+        margin-bottom: 10px;
+        border: 1px solid #ddd; 
+    }
+
+    #tablaFlats td {
+        display: block;
+        text-align: right;
+        font-size: 14px;
+        border-bottom: 1px solid #ddd; 
+        position: relative;
+        padding-left: 50%; 
+    }
+
+    #tablaFlats td::before {
+        content: attr(data-label); /* Usa el atributo data-label para mostrar las cabeceras */
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+}
+
+/* Aumenta el tamaño de la fuente y centra el texto */
+@media (max-width: 1024px) {
+  .logo-s {
+    margin: 10px 0 20px 20px;
+    align-items: center;
+  }
+
+  .nav {
+    align-items: center;
+    flex-direction: column;
+    align-content: center;
+    background-color: #ffffff;
+  }
+
+  .nav a {
+    padding: 8px 15px;
+    font-size: 18px; 
+    text-align: center; 
+  }
+
+  .nav a:hover {
+    background-color: #d1ec58;
+  }
+
+  .img-fondo {
+    margin-top: 10px;
+  }
+
+  .nav-ordenar {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .boton-ordenar {
+    width: 80%; 
+    margin-right: 0;
+    margin-bottom: 10px;
+    padding: 12px 20px; 
+    font-size: 18px; 
+    text-align: center; 
+  }
+
+  .contenedor-filtros {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .inputs-medidas {
+    width: 80%; 
+    margin-bottom: 10px;
+    padding: 12px; 
+    font-size: 18px; 
+    text-align: center; 
+  }
+
+  .boton {
+    width: 80%; 
+    padding: 12px 20px; 
+    font-size: 18px; 
+    text-align: center;
+  }
+}
