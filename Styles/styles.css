@@ -362,3 +362,15 @@ img {
     margin-left: 8px;
   }
 }
+
+ /*derechos*/
+#derechos {
+  padding: 1% 1%;
+}
+footer
+{
+    margin-top:10px;
+    width:100%;
+    font: condensed 120% sans-serif;
+    background-color:rgb(243, 246, 210);
+}
